@@ -1,31 +1,33 @@
 package Class;
 
-import java.util.*;
 
 public class Destination {
 
 	private String name;
 	private double distance;
 	
-	//constructor
 	public Destination(){
-			
 	}
-		
+	
+	public Destination(String name, double distance){
+		this.name = name;
+		this.distance = distance;
+	}
+	
 	public String getName(){
-		return "haha";
+		return this.name;
 	}
 	
-	public void setName(String s){
-		
+	public void setName(String name){
+		this.name = name;
 	}
 	
-	public double getDestination(){
-		return 5.555;
+	public double getDistance(){
+		return this.distance;
 	}
 	
-	public void setDestination(double d){
-		
+	public void setDistance(double dist){
+		this.distance = dist;
 	}
 	
 	public int compare(Destination d1, Destination d2){

@@ -1,5 +1,7 @@
 package Class;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DestinationList {
@@ -12,18 +14,25 @@ public class DestinationList {
 	}
 		
 	public Set<Destination> getDestinationList(){
-		return destinationList;
+		return this.destinationList;
 	}
 	
 	public void setDestinationList(Set<Destination> destinationList){
-		
+		this.destinationList = destinationList;
 	}
 	
-	public void readFile(String s){
-		
+	public boolean addDestination(Destination dest){
+		return destinationList.add(dest);
 	}
-	
-	private void processLine(String s){
-		
+
+	public Destination getDest(String destName) {
+		Destination dest = null;
+		for(Destination destValid : destinationList){
+			if(destName != null && destName.equals(destValid.getName())){
+				dest = destValid;
+				break;
+			}
+		}
+		return dest;
 	}
 }
