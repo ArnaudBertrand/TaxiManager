@@ -1,4 +1,3 @@
-Name, Distance
 Watford, 35
 Oxford, 95,5
 Edinburgh, 695

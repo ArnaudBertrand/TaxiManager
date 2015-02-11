@@ -50,7 +50,7 @@ public class DestinationsVisited {
 	
 	private void processLineDestValid(String inputLine){
 		String [] parts = inputLine.split(",");
-		Destination dest = new Destination(parts[1],Double.parseDouble(parts[2]));
+		Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
 		validDestinations.addDestination(dest);
 	}
 	

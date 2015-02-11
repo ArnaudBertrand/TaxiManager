@@ -1,4 +1,3 @@
-Taxi Registration Number, Name, Number of passengers
 LON-3FST6G, Watford, 1
 LON-45ABT4, Oxford, 2
 LON-12345B, Edinburgh, 3

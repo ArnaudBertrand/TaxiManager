@@ -7,8 +7,8 @@ public class Manager {
 	/**
 	 * Initialise constants
 	 */
-	public static final String PATH_DEST_VALID = "";
-	public static final String PATH_DEST_2014 = "";
+	public static final String PATH_DEST_VALID = "ValidDestinations.txt";
+	public static final String PATH_DEST_2014 = "VisitedDestination";
 	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
 	public static final String DEST_BOTH_PLACES = " PLACES VISITED IN BOTH 2014 AND 2015";
@@ -43,7 +43,11 @@ public class Manager {
 	}
 	
 	private void writeReport(){
+		StringBuilder report = new StringBuilder();
 		
+		// Get output destination sorted by year
+		report.append(getDestSortByYear());
+		System.out.println(report);
 	}
 	
 	private String getCostBounds(){
@@ -70,7 +74,7 @@ public class Manager {
 		
 		// Only new year
 		sb.append(onlyNew.size() + DEST_NEW_PLACES + FunctionalConstants.NEW_LINE);
-		for(Destination dest : onlyOld){
+		for(Destination dest : onlyNew){
 			sb.append(dest.getName() + FunctionalConstants.NEW_LINE);
 		}
 		
@@ -82,7 +86,7 @@ public class Manager {
 		
 		// Both year
 		sb.append(shared.size() + DEST_BOTH_PLACES + FunctionalConstants.NEW_LINE);
-		for(Destination dest : onlyOld){
+		for(Destination dest : shared){
 			sb.append(dest.getName() + FunctionalConstants.NEW_LINE);
 		}
 		
