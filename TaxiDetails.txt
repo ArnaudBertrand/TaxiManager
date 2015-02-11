@@ -1,0 +1,27 @@
+Driver Name, Taxi Registration Number
+John Smith, LON-3FST6G
+Anna Clarke, LON-45ABT4
+Joe Kent, LON-12345B
+Amanda Jones, LON-12345C
+Tim Kenneth, LON-ABCDE7
+Bob Rija, LON-ABCDE8
+Paul Dupont, LON-463DCE
+Franck Catinot, LON-89BM16
+Linda Siu, LON-000DS3
+Emma Jeanne, LON-00BMW9
+Jean Dujardin, LON-HIL789
+Chloe Swann, OXF-7NTR43
+Alain Delon, OXF-69PM96
+Marion Cotillard, OXF-PPG333
+Maude Annette, OXF-AB56LR
+François Lê, OXF-987654
+Alexandre Paris, OXF-987653
+Nicolas Vielozynski, OXF-987652
+Alexandra Moryousef, OXF-987651
+Quentin Dupeux, MAN-89BM15
+Ken Drinken, MAN-7NTR43
+Albert Montdor, MAN-KILLME
+Sofia Antipolis, MAN-XXXXXX
+Romain Clerc, MAN-70HJ80
+Victor Deschamps, MAN-65TV21
+Zack Effron, MAN-24PM24

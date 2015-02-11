@@ -1,0 +1,53 @@
+Taxi Registration Number, Name, Number of passengers
+LON-3FST6G, Watford, 1
+LON-45ABT4, Oxford, 2
+LON-12345B, Edinburgh, 3
+LON-12345C, Liverpool, 4
+LON-ABCDE7, Cambridge, 5
+LON-ABCDE8, Southampton, 6
+LON-463DCE, Birmingham, 5
+LON-89BM16, Manchester, 4
+LON-000DS3, Nottingham, 3
+LON-00BMW9, Dover, 2
+LON-HIL789, Kensington Palace, 1
+OXF-7NTR43, Hyde Park, 1
+OXF-69PM96, ZSL London Zoo, 1
+OXF-PPG333, Victoria Avenue, 1
+OXF-AB56LR, Clissold Park, 1
+OXF-987654, Tower of London, 2
+OXF-987653, Victoria Park, 3
+OXF-987652, Queen Elizabeth’s Walk, 4
+OXF-987651, Wembley Stadium, 5
+MAN-89BM15, Greenford, 6
+MAN-7NTR43, Royal Victoria, 5
+MAN-KILLME, Wimbledon, 4
+MAN-XXXXXX, Mitcham, 3
+MAN-70HJ80, Fulham, 3
+MAN-65TV21, Brixton, 3
+MAN-24PM24, Camberwell, 2
+LON-3FST6G, Burgess Park, 2
+LON-45ABT4, Saint Paul’s, 2
+LON-12345B, Holborn, 2
+LON-12345C, Marylebone, 1
+LON-ABCDE7, Paddington, 1
+LON-ABCDE8, Chelsea Bridge Road, 1
+LON-463DCE, South Kensingthon, 1
+LON-89BM16, London Bridge, 2
+LON-000DS3, Old Street, 1
+LON-00BMW9, Wembley Stadium, 2
+LON-HIL789, Greenford, 1
+OXF-7NTR43, Royal Victoria, 2
+OXF-69PM96, Wimbledon, 3
+OXF-PPG333, Fulham, 3
+OXF-AB56LR, Brixton, 1
+OXF-987654, Camberwell, 2
+OXF-987653, Burgess Park, 3
+OXF-987652, Saint Paul’s, 4
+OXF-987651, Holborn, 5
+MAN-89BM15, Marylebone, 6
+MAN-7NTR43, Dover, 3
+MAN-KILLME, Kensington Palace, 4
+MAN-XXXXXX, Hyde Park, 2
+MAN-70HJ80, ZSL London Zoo, 1
+MAN-65TV21, Victoria Avenue, 1
+MAN-24PM24, Wembley Stadium, 1

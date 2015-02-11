@@ -1,0 +1,36 @@
+Name, Distance
+Watford, 35
+Oxford, 95,5
+Edinburgh, 695
+Liverpool, 341,7
+Cambridge, 103,2
+Southampton, 129,1
+Birmingham, 191,5
+Manchester, 324,4
+Nottingham, 211,2
+Dover, 128,6
+Kensington Palace, 6,9
+Hyde Park, 2,5
+ZSL London Zoo, 5,9
+Victoria Avenue, 65,7
+Clissold Park, 8,8
+Tower of London, 1,6
+Victoria Park, 9
+Queen Elizabeth’s Walk, 9,5
+Wembley Stadium, 14,9
+Greenford, 20,5
+Royal Victoria, 12,1
+Wimbledon, 12,8
+Mitcham, 12,4
+Fulham, 6,2
+Brixton, 5,2
+Camberwell, 3,4
+Burgess Park, 8,8
+Saint Paul’s, 4,5
+Holborn, 3,3
+Marylebone, 5,1
+Paddington, 5,9
+Chelsea Bridge Road, 2,9
+South Kensingthon, 4
+London Bridge, 4
+Old Street, 4,9
