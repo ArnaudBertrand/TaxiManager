@@ -10,7 +10,6 @@ public class DestinationList {
 	
 	//constructor
 	public DestinationList(){
-			
 	}
 		
 	public Set<Destination> getDestinationList(){

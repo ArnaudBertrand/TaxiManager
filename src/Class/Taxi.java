@@ -9,32 +9,33 @@ public class Taxi {
 	private int nbOfSeats;
 	
 	//constructor
-	public Taxi(){
-						
+	public Taxi(String driverName, String regNb){	
+		this.driverName = driverName;
+		this.regNb = regNb;
 	}
 	
 	public String getRegNb(){
-		return regNb;
+		return this.regNb;
 	}
 	
-	public void setRegNb(String s){
-		
+	public void setRegNb(String regNb){
+		this.regNb = regNb;
 	}
 	
 	public String getDriverName(){
-		return driverName;
+		return this.driverName;
 	}
 	
-	public void setDriverName(String s){
-		
+	public void setDriverName(String driverName){
+		this.driverName = driverName;
 	} 
 	
 	public int getNbOfSeats(){
-		return 24;
+		return this.nbOfSeats;
 	}
 	
-	public void setNbOfSeats(int i){
-		
+	public void setNbOfSeats(int nbOfSeats){
+		this.nbOfSeats = nbOfSeats;
 	}
 	
 	public int compare(Taxi t1, Taxi t2){
@@ -43,6 +44,6 @@ public class Taxi {
 	
 	public boolean equals(){
 		return true;
-	}
+	} 
 
 }

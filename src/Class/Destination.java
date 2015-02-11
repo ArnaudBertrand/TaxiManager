@@ -6,6 +6,7 @@ public class Destination {
 	private String name;
 	private double distance;
 	
+	//constructor
 	public Destination(){
 	}
 	
