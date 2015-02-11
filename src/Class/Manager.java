@@ -7,8 +7,10 @@ public class Manager {
 	/**
 	 * Initialise constants
 	 */
+	public static final String PATH_TAXI_DETAILS = "TaxiDetails.txt";
 	public static final String PATH_DEST_VALID = "ValidDestinations.txt";
-	public static final String PATH_DEST_2014 = "VisitedDestination";
+	public static final String PATH_DEST_2014 = "VisitedDestination";	
+	
 	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
 	public static final String DEST_BOTH_PLACES = " PLACES VISITED IN BOTH 2014 AND 2015";
@@ -29,6 +31,9 @@ public class Manager {
 	
 	public void run(){
 		try {
+			// Import taxi details
+			taxiList.readFile(PATH_TAXI_DETAILS);
+			
 			// Import valid destinations
 			destinationsVisited.readFile(PATH_DEST_VALID, FunctionalConstants.DEST_VALID, null);
 			
