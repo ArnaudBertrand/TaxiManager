@@ -67,21 +67,18 @@ public class Manager {
 	 * @return string containing list of destinations sorted
 	 */
 	private String getDriverDestinations(){
-		// Read competitor file
-		//taxiList.readFile("TaxiDetails.txt");
-		//journeyList.readFile("JourneyDetails.txt");
-		String report = taxiList.getReadingErrors();
+		String report ="";
+		//report += taxiList.getReadingErrors();
 
 		// Generate the DriverDestinations report
-		//report += "\n" + taxiList.get........
 		report += "\n" + "Text file containing details of which places each driver"
 				+ " has visited : \n\n";
 		
-		String s = "MAN-24PM24";
+		report += "Number of taxis in the list : ";
 		report += taxiList.getTaxiNb() + "\n";
-		//Taxi t = taxiList.getTaxiByRegNb(s);
-		//report += t.getDriverName();
-		report += taxiList.getDriverNameByRegNb(s);
+		report += "Driver name for the taxi MAN-24PM24 : ";
+		report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n";
+		report += taxiList.getAllDriverName();
 				
 		// Print report in console and send it into a file
 		System.out.print(report);

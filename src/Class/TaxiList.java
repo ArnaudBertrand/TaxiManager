@@ -17,6 +17,8 @@ public class TaxiList {
 	private Set<Taxi> taxiList = new HashSet<Taxi>();
 	/** Reading errors **/
 	String readingErrors;
+	/** List of drivers name */
+	private ArrayList<String> driverNamesList = new ArrayList<String>();
 	
 	/**
 	 * Constructor of taxi list
@@ -57,18 +59,11 @@ public class TaxiList {
 	public Taxi getTaxiByRegNb(String regNb){
 		
 		Taxi taxi = null;
-		/*Iterator<Taxi> taxiIterator = taxiList.iterator();
+		Iterator<Taxi> taxiIterator = taxiList.iterator();
 		while(taxiIterator.hasNext()){
 			Taxi currentTaxi = taxiIterator.next();
 			if(currentTaxi.getRegNb() != null && regNb.equals(currentTaxi.getRegNb())){
 				taxi = currentTaxi;
-				break;
-			}
-		}
-		*/
-		for (Taxi t : taxiList) {
-			if(regNb.equals(t.getRegNb())){
-				taxi = t;
 				break;
 			}
 		}
@@ -93,6 +88,28 @@ public class TaxiList {
 	}
 	
 	/**
+	 * Get all the driver name of the list of taxis
+	 * @return all the driver name of the list
+	 */
+	public ArrayList<String> getAllDriverName(){
+		
+		for (Taxi t : taxiList) {
+			driverNamesList.add(t.getDriverName());
+		}
+		return driverNamesList;
+	}
+	
+	public String getRegNbForEachDriverName(){
+		
+		for(int i=0; i<driverNamesList.size(); i++){
+			//if(driverNamesList[i] == "pp"){
+				
+			//}
+		}
+		return "";
+	}
+	
+	/**
 	 * Add a new taxi
 	 * @param t Taxi to add
 	 * @return 1 success - 0 fail
@@ -113,37 +130,31 @@ public class TaxiList {
 	 */
 	private void processLine(String line){
 
-		String parts [] = line.split(",");
+		String [] parts = line.split(",");
 		String driverName = parts[0];
-		String regNb = parts[1];
+		String regNb = parts[1].trim();
 
 		//create Taxi object and add to the list
 		Taxi t = new Taxi(driverName, regNb);
-		this.addTaxi(t);
-
+		this.addTaxi(t); 
+		
 	}
 	
 	/**
 	 * Read a file
 	 * @param fileName path of the file to read
 	 */
-	public void readFile(String fileName){
-		try {
-			File f = new File(fileName);
-			Scanner scanner = new Scanner(f);
-			while (scanner.hasNextLine()) {
-				//read first line and process it
-				String inputLine = scanner.nextLine(); 
-				if (inputLine.length() != 0) {//ignored if blank line
-					processLine(inputLine);		
-				}	
-			}
+	public void readFile(String fileName) throws FileNotFoundException{
+		File f = new File(fileName);
+		Scanner scanner = new Scanner(f);
+		// Process each line
+		while (scanner.hasNextLine()) {
+			//read first line and process it
+			String inputLine = scanner.nextLine(); 
+			if (inputLine.length() != 0) {//ignored if blank line
+				processLine(inputLine);		
+			}	
 		}
-		//if the file is not found, stop with system exit
-		catch (FileNotFoundException fnf){
-			 System.out.println( fileName + " not found ");
-			 System.exit(0);
-		 }
 	}
 	
 	/**
