@@ -3,13 +3,15 @@ package Class;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class Manager {
 	/**
 	 * Initialise constants
 	 */
 	public static final String PATH_TAXI_DETAILS = "TaxiDetails.txt";
 	public static final String PATH_DEST_VALID = "ValidDestinations.txt";
-	public static final String PATH_DEST_2014 = "VisitedDestination";	
+	public static final String PATH_DEST_2014 = "VisitedDestination.txt";	
 	
 	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
@@ -45,6 +47,7 @@ public class Manager {
 		
 		// Write report
 		writeReport();
+		getDriverDestinations();
 	}
 	
 	private void writeReport(){
@@ -58,9 +61,33 @@ public class Manager {
 	private String getCostBounds(){
 		return "haha";
 	}
-	
+
+	/**
+	 * Get destination sorted by driver
+	 * @return string containing list of destinations sorted
+	 */
 	private String getDriverDestinations(){
-		return "hoho";
+		// Read competitor file
+		//taxiList.readFile("TaxiDetails.txt");
+		//journeyList.readFile("JourneyDetails.txt");
+		String report = taxiList.getReadingErrors();
+
+		// Generate the DriverDestinations report
+		//report += "\n" + taxiList.get........
+		report += "\n" + "Text file containing details of which places each driver"
+				+ " has visited : \n\n";
+		
+		String s = "MAN-24PM24";
+		report += taxiList.getTaxiNb() + "\n";
+		//Taxi t = taxiList.getTaxiByRegNb(s);
+		//report += t.getDriverName();
+		report += taxiList.getDriverNameByRegNb(s);
+				
+		// Print report in console and send it into a file
+		System.out.print(report);
+		taxiList.writeToFile("DriverDestinationsReport.txt", report);
+		return "";
+
 	}
 	
 	/**

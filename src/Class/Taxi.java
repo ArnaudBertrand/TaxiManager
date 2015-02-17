@@ -42,8 +42,8 @@ public class Taxi {
 		return 1;
 	}
 	
-	public boolean equals(){
-		return true;
+	public boolean equals(Taxi other){
+		return (other.getRegNb().equals(this.getRegNb()));
 	} 
 
 }
