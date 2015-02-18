@@ -77,9 +77,9 @@ public class Manager {
 		report += "Number of taxis in the list : ";
 		report += taxiList.getTaxiNb() + "\n";
 		report += "Driver name for the taxi MAN-24PM24 : ";
-		report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n";
-		report += taxiList.getAllDriverName();
-				
+		report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n\n";
+		report += taxiList.getAllDriverName() + "\n";	
+		
 		// Print report in console and send it into a file
 		System.out.print(report);
 		taxiList.writeToFile("DriverDestinationsReport.txt", report);

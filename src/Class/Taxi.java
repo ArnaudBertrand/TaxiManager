@@ -2,7 +2,7 @@ package Class;
 
 import java.util.*;
 
-public class Taxi {
+public class Taxi implements Comparable<Taxi> {
 	
 	private String regNb;
 	private String driverName;
@@ -39,11 +39,21 @@ public class Taxi {
 	}
 	
 	public int compare(Taxi t1, Taxi t2){
-		return 1;
+		return t1.getDriverName().compareTo(t2.getDriverName());
 	}
 	
 	public boolean equals(Taxi other){
 		return (other.getRegNb().equals(this.getRegNb()));
 	} 
+	
+	public int compareTo(Taxi other) {
+		return driverName.compareTo(other.driverName);
+	}
+	
+	public int hashCode() { 
+		return driverName.hashCode();
+	}
+
+
 
 }

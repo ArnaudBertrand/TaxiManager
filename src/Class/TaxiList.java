@@ -14,17 +14,17 @@ import java.util.*;
 public class TaxiList {
 
 	/** List of taxis **/
-	private Set<Taxi> taxiList = new HashSet<Taxi>();
+	private TreeSet<Taxi> taxiList = new TreeSet<Taxi>();
 	/** Reading errors **/
 	String readingErrors;
 	/** List of drivers name */
-	private ArrayList<String> driverNamesList = new ArrayList<String>();
+	private TreeSet<String> driverNamesList = new TreeSet<String>();
 	
 	/**
 	 * Constructor of taxi list
 	 */
 	public TaxiList(){	
-		this.taxiList = new HashSet<Taxi>();
+		this.taxiList = new TreeSet<Taxi>();
 		this.readingErrors = "";
 	}
 	
@@ -32,14 +32,14 @@ public class TaxiList {
 	 * Get the taxi list
 	 * @return the taxi list
 	 */
-	public Set<Taxi> getTaxiList(){
+	public TreeSet<Taxi> getTaxiList(){
 		return this.taxiList;
 	}
 	
 	/**
 	 * Set the taxi list
 	 */
-	public void setTaxiList(Set<Taxi> taxiList){
+	public void setTaxiList(TreeSet<Taxi> taxiList){
 		this.taxiList = taxiList;
 	}
 	
@@ -91,22 +91,32 @@ public class TaxiList {
 	 * Get all the driver name of the list of taxis
 	 * @return all the driver name of the list
 	 */
-	public ArrayList<String> getAllDriverName(){
+	public String getAllDriverName(){
 		
+		String allDriverName = "";
 		for (Taxi t : taxiList) {
-			driverNamesList.add(t.getDriverName());
+			allDriverName += t.getDriverName() + " : " + t.getRegNb() + "\n";
 		}
-		return driverNamesList;
+		return allDriverName;
 	}
 	
-	public String getRegNbForEachDriverName(){
+	/**
+	 * Get the destination for each driver name of the list of taxis
+	 * @return all the destinations by driver name
+	 */
+	public String getDriverNameAndDest(){
 		
-		for(int i=0; i<driverNamesList.size(); i++){
-			//if(driverNamesList[i] == "pp"){
-				
+		String driverNameDest = "";
+		for (Taxi t : taxiList) {
+			driverNameDest += t.getDriverName() + " : " + t.getRegNb() + "\n";
+			// ArrayList ou Set journeylist = ppfunction(t);
+			// for(Journey j : journeyList)
+			//{
+			//	driverNameDest += j.dest.getName() + "\n";	
 			//}
+			// driverNameDest += "\n";
 		}
-		return "";
+		return driverNameDest;
 	}
 	
 	/**
