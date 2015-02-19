@@ -1,6 +1,8 @@
 package Class;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JOptionPane;
@@ -9,10 +11,14 @@ public class Manager {
 	/**
 	 * Initialize constants
 	 */
-	public static final String PATH_TAXI_DETAILS = "TaxiDetails.txt";
-	public static final String PATH_DEST_VALID = "ValidDestinations.txt";
-	public static final String PATH_DEST_2014 = "VisitedDestination.txt";
-	public static final String PATH_DEST_JOURNEY = "JourneyDetails.txt";
+	public static final String PATH_READ_TAXI_DETAILS = "TaxiDetails.txt";
+	public static final String PATH_READ_DEST_VALID = "ValidDestinations.txt";
+	public static final String PATH_READ_DEST_2014 = "VisitedDestination.txt";
+	public static final String PATH_READ_DEST_JOURNEY = "JourneyDetails.txt";
+	
+	public static final String PATH_WRITE_COST_BOUNDS = "CostBoundsReport.txt";
+	public static final String PATH_WRITE_DRIVER_DEST= "DriverDestinationsReport.txt";
+	public static final String PATH_WRITE_DEST_YEAR_REP = "DestYearRepReport.txt";
 	
 	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
@@ -38,17 +44,17 @@ public class Manager {
 	public void run(){
 		try {
 			// Import taxi details
-			taxiList.readFile(PATH_TAXI_DETAILS);
+			taxiList.readFile(PATH_READ_TAXI_DETAILS);
 			
 			// Import valid destinations
-			destinationsVisited.readFile(PATH_DEST_VALID, FunctionalConstants.DEST_VALID, null);
+			destinationsVisited.readFile(PATH_READ_DEST_VALID, FunctionalConstants.DEST_VALID, null);
 
 			// Import JourneyList
-			journeyList.readFile(PATH_DEST_JOURNEY);
+			journeyList.readFile(PATH_READ_DEST_JOURNEY);
 			
 			
 			// Import destinations of 2014
-			destinationsVisited.readFile(PATH_DEST_2014, FunctionalConstants.DEST_VISITED, FunctionalConstants.YEAR_2014);
+			destinationsVisited.readFile(PATH_READ_DEST_2014, FunctionalConstants.DEST_VISITED, FunctionalConstants.YEAR_2014);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -59,17 +65,11 @@ public class Manager {
 	
 
 	private void writeReport(){
-		String report = "";
-		
-		getDriverDestinations();
-		
-		//report = getDestSortByYear();
-		// Journey part
-		//report = getCostBounds();
-		//journeyList.writeToFile("", report);
-	    System.out.println(report);
-	}
-	
+		writeToFile(PATH_WRITE_COST_BOUNDS,getCostBounds());
+		writeToFile(PATH_WRITE_DRIVER_DEST,getDriverDestinations());
+		writeToFile(PATH_WRITE_DEST_YEAR_REP,getDestSortByYear());		
+	}	
+
 	private String getCostBounds(){
 		// Get all the journeys
 		return journeyList.getAllJourneys();
@@ -95,9 +95,9 @@ public class Manager {
 		report += taxiList.getDriverNameAndDest();
 		
 		// Print report in console and send it into a file
-		System.out.print(report);
-		taxiList.writeToFile("DriverDestinationsReport.txt", report);
-		return "";
+		//System.out.print(report);
+		//taxiList.writeToFile("DriverDestinationsReport.txt", report);
+		return report;
 
 	}
 	
@@ -152,5 +152,30 @@ public class Manager {
 		this.journeyList= journeyList;
 	}
 	
+	/**
+	 * Write a report into a file
+	 * @param filename path of the file to write in
+	 * @param report report to write in the file
+	 */
+	public void writeToFile(String filename, String report) {
+		FileWriter fw;
+		try {
+		    fw = new FileWriter(filename);
+		    fw.write("##### Report #####\n");
+		    fw.write(report);
+		 	fw.close();
+		 }
+		 //message and stop if file not found
+		 catch (FileNotFoundException fnf){
+			 
+			 System.out.println(filename + " not found ");
+			 System.exit(0);
+		 }
+		 //stack trace here because we don't expect to come here
+		 catch (IOException ioe){
+		    ioe.printStackTrace();
+		    System.exit(1);
+		 }
+	}
 }
 

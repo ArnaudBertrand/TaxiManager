@@ -3,8 +3,8 @@
 Text file containing details of which places each driver has visited : 
 
 Alain Delon
-  ZSL London Zoo
   Wimbledon
+  ZSL London Zoo
 
 Albert Montdor
   Kensington Palace
@@ -32,8 +32,8 @@ Bob Rija
   Chelsea Bridge Road
 
 Chloe Swann
-  Hyde Park
   Royal Victoria
+  Hyde Park
 
 Emma Jeanne
   Dover
@@ -45,13 +45,13 @@ Franck Catinot
   London Bridge
 
 Francois Le
-  Tower of London
   Brixton
   Camberwell
+  Tower of London
 
 Jean Dujardin
-  Kensington Palace
   Greenford
+  Kensington Palace
 
 Joe Kent
   Edinburgh
@@ -103,6 +103,6 @@ Victor Deschamps
   Victoria Avenue
 
 Zack Effron
-  Camberwell
   Wembley Stadium
+  Camberwell
 
