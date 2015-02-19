@@ -8,6 +8,10 @@ public class Taxi implements Comparable<Taxi> {
 	private String driverName;
 	private int nbOfSeats;
 	
+	//default constructor
+	public Taxi(){
+	}
+	
 	//constructor
 	public Taxi(String driverName, String regNb){	
 		this.driverName = driverName;
@@ -38,10 +42,6 @@ public class Taxi implements Comparable<Taxi> {
 		this.nbOfSeats = nbOfSeats;
 	}
 	
-	public int compare(Taxi t1, Taxi t2){
-		return t1.getDriverName().compareTo(t2.getDriverName());
-	}
-	
 	public boolean equals(Taxi other){
 		return (other.getRegNb().equals(this.getRegNb()));
 	} 
@@ -49,11 +49,6 @@ public class Taxi implements Comparable<Taxi> {
 	public int compareTo(Taxi other) {
 		return driverName.compareTo(other.driverName);
 	}
-	
-	public int hashCode() { 
-		return driverName.hashCode();
-	}
-
 
 
 }

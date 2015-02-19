@@ -107,7 +107,7 @@ public class TaxiList {
 		String driverNameDest = "";
 		for (Taxi t : taxiList) {
 			driverNameDest += t.getDriverName() + " :\n"; // + t.getRegNb() + "\n";
-			// ArrayList ou Set journeylist = ppfunction(t);
+			// ArrayList journeylist = ppfunction(t);
 			// for(Journey j : journeyList)
 			//{
 			//	driverNameDest += j.dest.getName() + "\n";	
