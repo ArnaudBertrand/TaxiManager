@@ -36,8 +36,16 @@ public class Destination {
 	}
 	
 	public boolean equals(Object obj){
-		Destination d = (Destination) obj;
-		return this.getName() == d.getName();
+		if(obj != null && obj instanceof Destination){
+		    Destination d = (Destination) obj;			
+			return name == d.getName();
+		} else{
+			return false;
+		}
+	}
+	
+	public int hashCode(){
+		return name.hashCode();
 	}
 	
 }

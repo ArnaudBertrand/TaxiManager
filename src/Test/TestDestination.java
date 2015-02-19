@@ -33,6 +33,6 @@ public class TestDestination {
 		mess = "L > M result should be -1";
 		assertEquals(mess,-1,dest1.compare(dest1, dest3));
 		mess = "M < L result should be 1";
-		assertEquals(mess,1,dest1.compare(dest1, dest1));
+		assertEquals(mess,1,dest1.compare(dest3, dest1));
 	}
 }
