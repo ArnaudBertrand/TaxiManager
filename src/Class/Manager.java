@@ -7,11 +7,12 @@ import javax.swing.JOptionPane;
 
 public class Manager {
 	/**
-	 * Initialise constants
+	 * Initialize constants
 	 */
 	public static final String PATH_TAXI_DETAILS = "TaxiDetails.txt";
 	public static final String PATH_DEST_VALID = "ValidDestinations.txt";
-	public static final String PATH_DEST_2014 = "VisitedDestination.txt";	
+	public static final String PATH_DEST_2014 = "VisitedDestination.txt";
+	public static final String PATH_DEST_JOURNEY = "JourneyDetails.txt";
 	
 	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
@@ -35,6 +36,9 @@ public class Manager {
 		try {
 			// Import taxi details
 			taxiList.readFile(PATH_TAXI_DETAILS);
+			
+			// Import JourneyList
+			journeyList.readFile(PATH_DEST_JOURNEY);
 			
 			// Import valid destinations
 			destinationsVisited.readFile(PATH_DEST_VALID, FunctionalConstants.DEST_VALID, null);
