@@ -60,42 +60,40 @@ public class DestinationsVisited {
 			destinationList.addDestination(dest);			
 		}
 	}
-
-	public DestinationList getFromYear(String year) {
-		return destinationsVisited.get(year);
-	}
 	
 	public HashMap<String, Set<Destination>> getYearRepartition(String year1, String year2) {
-		Set<Destination> dl1 = destinationsVisited.get(year1).getDestinationList();
-		Set<Destination> dl2 = destinationsVisited.get(year2).getDestinationList();
-		
 		// Create result map
 		HashMap<String,Set<Destination>> result = new HashMap<String,Set<Destination>>();
 		Set<Destination> year1Only = new HashSet<Destination>();
 		Set<Destination> year2Only = new HashSet<Destination>();
 		Set<Destination> shared = new HashSet<Destination>();
 		
-		for(Destination dest : dl1){
-			if(dl2.contains(dest)){
-				// Handle shared
-				shared.add(dest);
-			} else {
-				// Handle year 1 only
-				year1Only.add(dest);
+		if(destinationsVisited.get(year1) != null && destinationsVisited.get(year2) != null){
+			Set<Destination> dl1 = destinationsVisited.get(year1).getDestinationList();
+			Set<Destination> dl2 = destinationsVisited.get(year2).getDestinationList();			
+			
+			for(Destination dest : dl1){
+				if(dl2.contains(dest)){
+					// Handle shared
+					shared.add(dest);
+				} else {
+					// Handle year 1 only
+					year1Only.add(dest);
+				}
 			}
-		}
-		
-		// Handle year 2 only
-		for(Destination dest : dl2){
-			if(shared.contains(dest)){
-				year2Only.add(dest);
+			
+			// Handle year 2 only
+			for(Destination dest : dl2){
+				if(shared.contains(dest)){
+					year2Only.add(dest);
+				}
 			}
 		}
 		
 		result.put(year1, year1Only);
 		result.put(year2, year2Only);
 		result.put(FunctionalConstants.YEAR_BOTH, shared);
-		return result;
+		
+		return result;			
 	}
-
 }
