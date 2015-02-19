@@ -78,11 +78,12 @@ public class Manager {
 		report += "\n" + "Text file containing details of which places each driver"
 				+ " has visited : \n\n";
 		
-		report += "Number of taxis in the list : ";
-		report += taxiList.getTaxiNb() + "\n";
-		report += "Driver name for the taxi MAN-24PM24 : ";
-		report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n\n";
-		report += taxiList.getAllDriverName() + "\n";	
+		//report += "Number of taxis in the list : ";
+		//report += taxiList.getTaxiNb() + "\n";
+		//report += "Driver name for the taxi MAN-24PM24 : ";
+		//report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n\n";
+		//report += taxiList.getAllDriverName() + "\n";
+		report += taxiList.getDriverNameAndDest();
 		
 		// Print report in console and send it into a file
 		System.out.print(report);

@@ -17,8 +17,6 @@ public class TaxiList {
 	private TreeSet<Taxi> taxiList = new TreeSet<Taxi>();
 	/** Reading errors **/
 	String readingErrors;
-	/** List of drivers name */
-	private TreeSet<String> driverNamesList = new TreeSet<String>();
 	
 	/**
 	 * Constructor of taxi list
@@ -108,7 +106,7 @@ public class TaxiList {
 		
 		String driverNameDest = "";
 		for (Taxi t : taxiList) {
-			driverNameDest += t.getDriverName() + " : " + t.getRegNb() + "\n";
+			driverNameDest += t.getDriverName() + " :\n"; // + t.getRegNb() + "\n";
 			// ArrayList ou Set journeylist = ppfunction(t);
 			// for(Journey j : journeyList)
 			//{
