@@ -29,7 +29,7 @@ public class Manager {
 	
 	//constructor
 	public Manager(){
-		taxiList = new TaxiList();
+		taxiList = new TaxiList(this);
 		journeyList = new JourneyList(this);
 		destinationsVisited = new DestinationsVisited(this);
 		validDestinations = new DestinationList();
@@ -60,10 +60,12 @@ public class Manager {
 
 	private void writeReport(){
 		String report = "";
-	
+		
+		getDriverDestinations();
+		
 		//report = getDestSortByYear();
 		// Journey part
-		report = getCostBounds();
+		//report = getCostBounds();
 		//journeyList.writeToFile("", report);
 	    System.out.println(report);
 	}
@@ -140,6 +142,14 @@ public class Manager {
 
 	public void setValidDestinations(DestinationList validDestinations) {
 		this.validDestinations = validDestinations;
+	}
+	
+	public JourneyList getJourneyList() {
+		return journeyList;
+	}
+
+	public void setJourneyList(JourneyList journeyList) {
+		this.journeyList= journeyList;
 	}
 	
 }

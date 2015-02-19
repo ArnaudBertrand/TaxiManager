@@ -2,29 +2,107 @@
 
 Text file containing details of which places each driver has visited : 
 
-Alain Delon :
-Albert Montdor :
-Alexandra Moryousef :
-Alexandre Paris :
-Amanda Jones :
-Anna Clarke :
-Bob Rija :
-Chloe Swann :
-Emma Jeanne :
-Franck Catinot :
-Fran�ois L� :
-Jean Dujardin :
-Joe Kent :
-John Smith :
-Ken Drinken :
-Linda Siu :
-Marion Cotillard :
-Maude Annette :
-Nicolas Vielozynski :
-Paul Dupont :
-Quentin Dupeux :
-Romain Clerc :
-Sofia Antipolis :
-Tim Kenneth :
-Victor Deschamps :
-Zack Effron :
+Alain Delon
+  ZSL London Zoo
+  Wimbledon
+
+Albert Montdor
+  Kensington Palace
+
+Alexandra Moryousef
+  Wembley Stadium
+  Holborn
+
+Alexandre Paris
+  Victoria Park
+  Burgess Park
+
+Amanda Jones
+  Liverpool
+  Mitcham
+  Marylebone
+
+Anna Clarke
+  Oxford
+  Royal Victoria
+  Saint Pauls
+
+Bob Rija
+  Southampton
+  Chelsea Bridge Road
+
+Chloe Swann
+  Hyde Park
+  Royal Victoria
+
+Emma Jeanne
+  Dover
+  Wembley Stadium
+
+Franck Catinot
+  Manchester
+  Fulham
+  London Bridge
+
+Francois Le
+  Tower of London
+  Brixton
+  Camberwell
+
+Jean Dujardin
+  Kensington Palace
+  Greenford
+
+Joe Kent
+  Edinburgh
+  Wimbledon
+  Holborn
+
+John Smith
+  Watford
+  Greenford
+  Burgess Park
+
+Ken Drinken
+  Dover
+
+Linda Siu
+  Nottingham
+  Old Street
+
+Marion Cotillard
+  Victoria Avenue
+  Fulham
+
+Maude Annette
+  Clissold Park
+  Brixton
+
+Nicolas Vielozynski
+  Queen Elizabeths Walk
+  Saint Pauls
+
+Paul Dupont
+  Birmingham
+  South Kensingthon
+
+Quentin Dupeux
+  Marylebone
+
+Romain Clerc
+  ZSL London Zoo
+
+Sofia Antipolis
+  Hyde Park
+
+Tim Kenneth
+  Cambridge
+  Paddington
+
+Victor Deschamps
+  Victoria Avenue
+
+Zack Effron
+  Camberwell
+  Wembley Stadium
+

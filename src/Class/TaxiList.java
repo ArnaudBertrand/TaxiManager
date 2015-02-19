@@ -17,13 +17,15 @@ public class TaxiList {
 	private TreeSet<Taxi> taxiList = new TreeSet<Taxi>();
 	/** Reading errors **/
 	String readingErrors;
+	private Manager manager;
 	
 	/**
 	 * Constructor of taxi list
 	 */
-	public TaxiList(){	
+	public TaxiList(Manager manager){	
 		this.taxiList = new TreeSet<Taxi>();
 		this.readingErrors = "";
+		this.manager = manager;
 	}
 	
 	/**
@@ -106,40 +108,16 @@ public class TaxiList {
 		
 		String driverNameDest = "";
 		for (Taxi t : taxiList) {
-			driverNameDest += t.getDriverName() + " :\n";
-			/*ArrayList<Journey> journeys = getJourneysForTaxi(t);
-			for(Journey j : journeys)
+			driverNameDest += t.getDriverName() + "\n";
+			ArrayList<String> journeys = manager.getJourneyList().getDestinationsForTaxi(t);
+			for(String j : journeys)
 			{
-				driverNameDest += j.getDestination().getName() + "\n";	
+				driverNameDest += "  " + j + "\n";	
 			}
-			driverNameDest += "\n";*/
+			driverNameDest += "\n";
 		}
 		return driverNameDest;
 	}
-
-	/*
-	/**
-	 * Get all journeys for a specific taxi
-	 * @return string of journeys
-	 
-	public ArrayList<String> getJourneysForTaxi(Taxi t){
-		
-		ArrayList<String> journeys = new ArrayList<String>();
-		String regNb = t.getRegNb();
-		// Go through the JourneyList
-		Iterator<Journey> j = journeyList.iterator();
-		while(j.hasNext())
-		{
-			//For each journey
-		    Journey currentJourney = j.next();
-		    String taxiNb =   currentJourney.getTaxi().getRegNb();
-		    if(taxiNb.equals(regNb)){
-		    	String destination = currentJourney.getDestination().getName();
-				journeys.add(destination);
-		    }
-		}
-		return journeys;
-	}*/
 	
 	/**
 	 * Add a new taxi

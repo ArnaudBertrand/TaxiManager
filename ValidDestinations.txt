@@ -15,7 +15,7 @@ Victoria Avenue, 65,7
 Clissold Park, 8,8
 Tower of London, 1,6
 Victoria Park, 9
-Queen Elizabeth’s Walk, 9,5
+Queen Elizabeths Walk, 9,5
 Wembley Stadium, 14,9
 Greenford, 20,5
 Royal Victoria, 12,1
@@ -25,7 +25,7 @@ Fulham, 6,2
 Brixton, 5,2
 Camberwell, 3,4
 Burgess Park, 8,8
-Saint Paul’s, 4,5
+Saint Pauls, 4,5
 Holborn, 3,3
 Marylebone, 5,1
 Paddington, 5,9
@@ -33,3 +33,11 @@ Chelsea Bridge Road, 2,9
 South Kensingthon, 4
 London Bridge, 4
 Old Street, 4,9
+Saint Giles, 3,2
+Essex Road, 7,4
+Finsbury, 3,6
+Moorgate, 3,7
+Shadwell, 6,4
+Cannon Street, 2,1
+Walworth, 7,9
+Forest Hill, 2,6

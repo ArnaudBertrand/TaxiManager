@@ -15,17 +15,17 @@ OXF-PPG333, Victoria Avenue, 1
 OXF-AB56LR, Clissold Park, 1
 OXF-987654, Tower of London, 2
 OXF-987653, Victoria Park, 3
-OXF-987652, Queen Elizabeth’s Walk, 4
+OXF-987652, Queen Elizabeths Walk, 4
 OXF-987651, Wembley Stadium, 5
-MAN-89BM15, Greenford, 6
-MAN-7NTR43, Royal Victoria, 5
-MAN-KILLME, Wimbledon, 4
-MAN-XXXXXX, Mitcham, 3
-MAN-70HJ80, Fulham, 3
-MAN-65TV21, Brixton, 3
+LON-3FST6G, Greenford, 6
+LON-45ABT4, Royal Victoria, 5
+LON-12345B, Wimbledon, 4
+LON-12345C, Mitcham, 3
+LON-89BM16, Fulham, 3
+OXF-987654, Brixton, 3
 MAN-24PM24, Camberwell, 2
 LON-3FST6G, Burgess Park, 2
-LON-45ABT4, Saint Paul’s, 2
+LON-45ABT4, Saint Pauls, 2
 LON-12345B, Holborn, 2
 LON-12345C, Marylebone, 1
 LON-ABCDE7, Paddington, 1
@@ -41,7 +41,7 @@ OXF-PPG333, Fulham, 3
 OXF-AB56LR, Brixton, 1
 OXF-987654, Camberwell, 2
 OXF-987653, Burgess Park, 3
-OXF-987652, Saint Paul’s, 4
+OXF-987652, Saint Pauls, 4
 OXF-987651, Holborn, 5
 MAN-89BM15, Marylebone, 6
 MAN-7NTR43, Dover, 3

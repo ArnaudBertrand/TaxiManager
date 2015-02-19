@@ -192,4 +192,28 @@ public class JourneyList {
 		return sb1.toString() + sb2.toString();
 	}
 	
+	/**
+	 * Get all journeys for a specific taxi
+	 * @return string of journeys
+	 */
+	public ArrayList<String> getDestinationsForTaxi(Taxi t){
+		
+		ArrayList<String> journeys = new ArrayList<String>();
+		String regNb = t.getRegNb();
+		// Go through the JourneyList
+		Iterator<Journey> j = journeyList.iterator();
+		while(j.hasNext())
+		{
+			//For each journey
+		    Journey currentJourney = j.next();
+		    String taxiNb =   currentJourney.getTaxi().getRegNb();
+		    if(taxiNb.equals(regNb)){
+		    	String destination = currentJourney.getDestination().getName();
+				journeys.add(destination);
+		    }
+		}
+		return journeys;
+	}
+
+	
 }
