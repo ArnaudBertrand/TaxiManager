@@ -142,7 +142,7 @@ public class JourneyList {
 	public String getAllJourneys(){
 		
 		// Go through the JourneyList
-		journeyList.sort(new JourneyComparator());
+		Collections.sort(journeyList, new JourneyComparator());
 		Iterator<Journey> j = journeyList.iterator();
 		StringBuilder sb1 = new StringBuilder("CHARGES FOR THE TOP 5 JOURNEYS\n");
 		StringBuilder sb2 = new StringBuilder("CHARGES FOR THE CHEAPEST 5 JOURNEYS\n");
@@ -174,7 +174,7 @@ public class JourneyList {
 		    allJourneys += String.format("%10s", nbPeople);
 		    
 		    // Cost
-		    allJourneys += String.format("%10s", "Cost £");
+		    allJourneys += String.format("%10s", "Cost ï¿½");
 		    allJourneys += String.format("%6.2f", currentJourney.getJourneyFee());
 		    allJourneys += '\n';
 		    
