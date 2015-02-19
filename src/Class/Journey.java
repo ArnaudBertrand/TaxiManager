@@ -64,7 +64,7 @@ public class Journey {
 			fee = fee + 1.00*nbPerson;
 		}
 
-		return 100;
+		return fee;
 	}
 	
 	public int compare(Journey j1, Journey j2){

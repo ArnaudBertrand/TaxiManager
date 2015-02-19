@@ -24,12 +24,15 @@ public class Manager {
 	private JourneyList journeyList;
 	/** List of destinations visited **/
 	private DestinationsVisited destinationsVisited;
+	/** List of valid destinations **/
+	private DestinationList validDestinations;
 	
 	//constructor
 	public Manager(){
 		taxiList = new TaxiList();
-		journeyList = new JourneyList();
-		destinationsVisited = new DestinationsVisited();
+		journeyList = new JourneyList(this);
+		destinationsVisited = new DestinationsVisited(this);
+		validDestinations = new DestinationList();
 	}
 	
 	public void run(){
@@ -37,11 +40,12 @@ public class Manager {
 			// Import taxi details
 			taxiList.readFile(PATH_TAXI_DETAILS);
 			
+			// Import valid destinations
+			destinationsVisited.readFile(PATH_DEST_VALID, FunctionalConstants.DEST_VALID, null);
+
 			// Import JourneyList
 			journeyList.readFile(PATH_DEST_JOURNEY);
 			
-			// Import valid destinations
-			destinationsVisited.readFile(PATH_DEST_VALID, FunctionalConstants.DEST_VALID, null);
 			
 			// Import destinations of 2014
 			destinationsVisited.readFile(PATH_DEST_2014, FunctionalConstants.DEST_VISITED, FunctionalConstants.YEAR_2014);
@@ -57,6 +61,7 @@ public class Manager {
 	private void writeReport(){
 		String report = "";
 	
+		//report = getDestSortByYear();
 		// Journey part
 		report = getCostBounds();
 		//journeyList.writeToFile("", report);
@@ -64,18 +69,8 @@ public class Manager {
 	}
 	
 	private String getCostBounds(){
-		
-		// Generate the JourneyFee report
-		String report = "JourneyFeeReport";
-		report += "\n" + "Text file containing details of each journey" + ": \n\n";
-		
 		// Get all the journeys
-		String allJourneys = journeyList.getAllJourneys();
-		
-		//Fille the report
-		report += allJourneys;
-		
-		return report;
+		return journeyList.getAllJourneys();
 	}
 
 	/**
@@ -137,6 +132,14 @@ public class Manager {
 		}
 		
 		return sb.toString();
+	}
+
+	public DestinationList getValidDestinations() {
+		return validDestinations;
+	}
+
+	public void setValidDestinations(DestinationList validDestinations) {
+		this.validDestinations = validDestinations;
 	}
 	
 }

@@ -17,11 +17,13 @@ public class JourneyList {
 	private ArrayList<Journey> journeyList = new ArrayList<Journey>();
 	// Reading errors
 	String readingErrors;
+	private Manager manager;
 	
 	//constructor
-	public JourneyList(){
+	public JourneyList(Manager manager){
 			this.journeyList = new ArrayList<Journey>();
 			this.readingErrors = "";
+			this.manager = manager;
 	}
 	
 	/**
@@ -42,6 +44,7 @@ public class JourneyList {
 	/**
 	 * Read a file
 	 * @param fileName path of the file to read
+	 * @param destinationsVisited 
 	 */
 	public void readFile(String fileName) throws FileNotFoundException{
 		File f = new File(fileName);
@@ -110,11 +113,13 @@ public class JourneyList {
 		Taxi taxi = new Taxi("", regNb);
 		
 		//Get the destination object corresponding to the destination
-		Destination destination =new Destination(dest,-1);
+		Destination destination = manager.getValidDestinations().getDest(dest);
 		
-		//create Journey object and add it to the list
-		Journey j = new Journey(taxi, destination, nbPerson);
-		this.addJourney(j);
+		if(destination != null){
+			//create Journey object and add it to the list
+			Journey j = new Journey(taxi, destination, nbPerson);
+			this.addJourney(j);			
+		}
 	}
 	
 	/**
@@ -136,31 +141,55 @@ public class JourneyList {
 	 */
 	public String getAllJourneys(){
 		
-		String allJourneys = "";		
 		// Go through the JourneyList
+		journeyList.sort(new JourneyComparator());
 		Iterator<Journey> j = journeyList.iterator();
+		StringBuilder sb1 = new StringBuilder("CHARGES FOR THE TOP 5 JOURNEYS\n");
+		StringBuilder sb2 = new StringBuilder("CHARGES FOR THE CHEAPEST 5 JOURNEYS\n");
+		int counter = 0;
 		while(j.hasNext())
 		{
+			String allJourneys = "";		
 			//For each journey
 		    Journey currentJourney = j.next();
 			// Get the wanted fields
-		    String TaxiNB =   currentJourney.getTaxi().getRegNb();
-			String Destination = currentJourney.getDestination().getName();
-			String Distance = currentJourney.getDestination().getDistance() + " miles ";
-			//Be careful to people/person
-			String NbPeople = "";
+		    // Taxi reg
+		    allJourneys += String.format("%-12s", currentJourney.getTaxi().getRegNb());
+		    
+		    // Destination name
+		    allJourneys += String.format("%-25s", currentJourney.getDestination().getName());
+		    
+		    // Destination distance
+		    allJourneys += String.format("%7.1f", currentJourney.getDestination().getDistance());
+		    allJourneys += String.format("%-4s", "km");
+		    
+			// Nb people
+		    String nbPeople = "";
 			if (currentJourney.getNbPerson() == 1){
-			NbPeople = currentJourney.getNbPerson() + " person";
+				nbPeople = currentJourney.getNbPerson() + " person";
 			}
 			else {
-			NbPeople = currentJourney.getNbPerson() + " people";	
+				nbPeople = currentJourney.getNbPerson() + " people";	
 			}
-			String Cost = "Cost £" + currentJourney.getJourneyFee() ;
-			// Add the fields and set the format
-			allJourneys += String.format("%-15s%-25s%-15s%-12s%-15s\n", TaxiNB, Destination, Distance, NbPeople, Cost);
+		    allJourneys += String.format("%10s", nbPeople);
+		    
+		    // Cost
+		    allJourneys += String.format("%10s", "Cost £");
+		    allJourneys += String.format("%6.2f", currentJourney.getJourneyFee());
+		    allJourneys += '\n';
+		    
+		    if(counter <5){
+		    	sb1.append(allJourneys);
+		    }
+		    if(counter >= (journeyList.size() -5)){
+		    	sb2.append(allJourneys);
+		    }
+		    counter++;
 		}
+		
+		sb1.append("\n");
 	
-		return allJourneys;
+		return sb1.toString() + sb2.toString();
 	}
 	
 }

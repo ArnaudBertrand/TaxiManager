@@ -7,13 +7,18 @@ import java.util.*;
 public class DestinationsVisited {
 
 	private HashMap<String, DestinationList> destinationsVisited;
-	private DestinationList validDestinations;
+	private Manager manager;
 	
 	//constructor
-	public DestinationsVisited(){
+	public DestinationsVisited (){
+		destinationsVisited = new HashMap<String, DestinationList>();
+	}
+	public DestinationsVisited(Manager manager){
 		// Instanciate variables
 		destinationsVisited = new HashMap<String, DestinationList>();
-		validDestinations = new DestinationList();
+		
+		// Set valid destinations
+		this.manager = manager;
 		
 		// Add year 2014 and 2015
 		destinationsVisited.put("2014", new DestinationList());
@@ -51,11 +56,11 @@ public class DestinationsVisited {
 	private void processLineDestValid(String inputLine){
 		String [] parts = inputLine.split(",");
 		Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
-		validDestinations.addDestination(dest);
+		manager.getValidDestinations().addDestination(dest);
 	}
 	
 	private void processLineDestVisited(String destName, DestinationList destinationList){
-		Destination dest = validDestinations.getDest(destName);
+		Destination dest = manager.getValidDestinations().getDest(destName);
 		if(dest != null){
 			destinationList.addDestination(dest);			
 		}
