@@ -51,19 +51,31 @@ public class Manager {
 		
 		// Write report
 		writeReport();
-		getDriverDestinations();
 	}
 	
+
 	private void writeReport(){
-		StringBuilder report = new StringBuilder();
-		
-		// Get output destination sorted by year
-		report.append(getDestSortByYear());
-		System.out.println(report);
+		String report = "";
+	
+		// Journey part
+		report = getCostBounds();
+		//journeyList.writeToFile("", report);
+	    System.out.println(report);
 	}
 	
 	private String getCostBounds(){
-		return "haha";
+		
+		// Generate the JourneyFee report
+		String report = "JourneyFeeReport";
+		report += "\n" + "Text file containing details of each journey" + ": \n\n";
+		
+		// Get all the journeys
+		String allJourneys = journeyList.getAllJourneys();
+		
+		//Fille the report
+		report += allJourneys;
+		
+		return report;
 	}
 
 	/**

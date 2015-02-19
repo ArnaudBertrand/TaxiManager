@@ -103,16 +103,14 @@ public class JourneyList {
 		
 		String [] parts = line.split(",");
 		String regNb = parts[0].trim();
-		String dest = parts[1];
+		String dest = parts[1].trim();
 		int nbPerson = Integer.parseInt(parts[2].trim());
 		
 		//Get the taxi object corresponding to the regNb
-		TaxiList tl = new TaxiList();	
-		Taxi taxi = tl.getTaxiByRegNb(regNb);
+		Taxi taxi = new Taxi("", regNb);
 		
 		//Get the destination object corresponding to the destination
-		DestinationList dl = new DestinationList();
-		Destination destination = dl.getDest(dest);
+		Destination destination =new Destination(dest,-1);
 		
 		//create Journey object and add it to the list
 		Journey j = new Journey(taxi, destination, nbPerson);
@@ -131,4 +129,38 @@ public class JourneyList {
 		}
 		return isNotExisting;
 	}
+	
+	/**
+	 * Get all journeys
+	 * @return string of journeys
+	 */
+	public String getAllJourneys(){
+		
+		String allJourneys = "";		
+		// Go through the JourneyList
+		Iterator<Journey> j = journeyList.iterator();
+		while(j.hasNext())
+		{
+			//For each journey
+		    Journey currentJourney = j.next();
+			// Get the wanted fields
+		    String TaxiNB =   currentJourney.getTaxi().getRegNb();
+			String Destination = currentJourney.getDestination().getName();
+			String Distance = currentJourney.getDestination().getDistance() + " miles ";
+			//Be careful to people/person
+			String NbPeople = "";
+			if (currentJourney.getNbPerson() == 1){
+			NbPeople = currentJourney.getNbPerson() + " person";
+			}
+			else {
+			NbPeople = currentJourney.getNbPerson() + " people";	
+			}
+			String Cost = "Cost £" + currentJourney.getJourneyFee() ;
+			// Add the fields and set the format
+			allJourneys += String.format("%-15s%-25s%-15s%-12s%-15s\n", TaxiNB, Destination, Distance, NbPeople, Cost);
+		}
+	
+		return allJourneys;
+	}
+	
 }

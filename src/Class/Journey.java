@@ -1,6 +1,5 @@
 package Class;
 
-import java.util.*;
 
 public class Journey {
 
@@ -39,8 +38,12 @@ public class Journey {
 		this.nbPerson = nbPerson;
 	}
 	
+	/**
+	 * Calculate the fee for a journey
+	 * @return fee
+	 * */
 	public double getJourneyFee(){
-		//Instantiation of the variables, fee set to 5£
+		//Instantiation of the variables, fee set to 5£ at first
 		double fee = 5.00;
 		double distance;
 		int nbPerson;
@@ -61,11 +64,11 @@ public class Journey {
 			fee = fee + 1.00*nbPerson;
 		}
 
-		return fee;
+		return 100;
 	}
 	
 	public int compare(Journey j1, Journey j2){
-		return 1;
+		return j1.getDestination().getName().compareTo(j2.getDestination().getName());
 	}
 	
 }
