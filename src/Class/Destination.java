@@ -32,11 +32,12 @@ public class Destination {
 	}
 	
 	public int compare(Destination d1, Destination d2){
-		return 1;
+		return d1.getName().compareTo(d2.getName());
 	}
 	
-	public boolean equals(){
-		return true;
+	public boolean equals(Object obj){
+		Destination d = (Destination) obj;
+		return this.getName() == d.getName();
 	}
 	
 }
