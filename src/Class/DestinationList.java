@@ -91,11 +91,28 @@ public class DestinationList {
 	 * Get the list of names of destinations
 	 * @return list of name of destinations
 	 */
-	public Object getNameList() {
+	public String getNameList() {
 		String destList = "";
 		for(Destination dest : destinationList){
 			destList += dest.getName() + FunctionalConstants.NEW_LINE;
 		}
 		return destList;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		boolean res = true;
+		if(other != null && other instanceof DestinationList){
+		    DestinationList d = (DestinationList) other;
+		    for(Destination dest : destinationList){
+		    	if(!d.contains(dest)){
+		    		res = false;
+		    		break;
+		    	}
+		    }
+		} else{
+			res = false;
+		}
+		return res;
 	}
 }
