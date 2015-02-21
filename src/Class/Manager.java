@@ -67,7 +67,8 @@ public class Manager {
 	private void writeReport(){
 		writeToFile(PATH_WRITE_COST_BOUNDS,getCostBounds());
 		writeToFile(PATH_WRITE_DRIVER_DEST,getDriverDestinations());
-		writeToFile(PATH_WRITE_DEST_YEAR_REP,getDestSortByYear());		
+		writeToFile(PATH_WRITE_DEST_YEAR_REP,getDestSortByYear());
+		System.out.println(getDestSortByYear());
 	}	
 
 	private String getCostBounds(){
@@ -149,7 +150,15 @@ public class Manager {
 	}
 
 	public void setJourneyList(JourneyList journeyList) {
-		this.journeyList= journeyList;
+		this.journeyList = journeyList;
+	}
+	
+	public DestinationsVisited getDestinationsVisited() {
+		return destinationsVisited;
+	}
+
+	public void setDestinationsVisited(DestinationsVisited destinationsVisited) {
+		this.destinationsVisited = destinationsVisited;
 	}
 	
 	/**

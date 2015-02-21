@@ -118,7 +118,8 @@ public class JourneyList {
 		if(destination != null){
 			//create Journey object and add it to the list
 			Journey j = new Journey(taxi, destination, nbPerson);
-			this.addJourney(j);			
+			this.addJourney(j);
+			manager.getDestinationsVisited().addDestForYear(destination, FunctionalConstants.YEAR_2015);
 		}
 	}
 	

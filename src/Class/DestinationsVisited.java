@@ -18,11 +18,7 @@ public class DestinationsVisited {
 		destinationsVisited = new HashMap<String, DestinationList>();
 		
 		// Set valid destinations
-		this.manager = manager;
-		
-		// Add year 2014 and 2015
-		destinationsVisited.put("2014", new DestinationList());
-		destinationsVisited.put("2015", new DestinationList());
+		this.manager = manager;		
 	}
 	
 	public HashMap<String, DestinationList> getDestinationsVisited(){
@@ -62,7 +58,7 @@ public class DestinationsVisited {
 	private void processLineDestVisited(String destName, DestinationList destinationList){
 		Destination dest = manager.getValidDestinations().getDest(destName);
 		if(dest != null){
-			destinationList.addDestination(dest);			
+			addDestForYear(dest,FunctionalConstants.YEAR_2014);			
 		}
 	}
 	
@@ -89,7 +85,7 @@ public class DestinationsVisited {
 			
 			// Handle year 2 only
 			for(Destination dest : dl2){
-				if(shared.contains(dest)){
+				if(!shared.contains(dest)){
 					year2Only.add(dest);
 				}
 			}
@@ -100,5 +96,14 @@ public class DestinationsVisited {
 		result.put(FunctionalConstants.YEAR_BOTH, shared);
 		
 		return result;			
+	}
+	
+	public boolean addDestForYear(Destination dest, String year){
+		DestinationList dstList = destinationsVisited.get(year);
+		if(dstList == null){
+			dstList = new DestinationList();
+			destinationsVisited.put(year, dstList);
+		}
+		return dstList.addDestination(dest);
 	}
 }

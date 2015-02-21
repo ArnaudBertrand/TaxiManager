@@ -1,0 +1,14 @@
+##### Report #####
+CHARGES FOR THE TOP 5 JOURNEYS
+LON-12345B  Edinburgh                  695.0km    3 people    Cost ?699.05
+LON-12345C  Liverpool                  341.0km    4 people    Cost ?350.59
+LON-89BM16  Manchester                 324.0km    4 people    Cost ?333.76
+LON-000DS3  Nottingham                 211.0km    3 people    Cost ?219.89
+LON-463DCE  Birmingham                 191.0km    5 people    Cost ?204.09
+
+CHARGES FOR THE CHEAPEST 5 JOURNEYS
+LON-000DS3  Old Street                   4.0km    1 person    Cost ?  9.96
+MAN-XXXXXX  Hyde Park                    2.0km    2 people    Cost ?  8.98
+OXF-987654  Tower of London              1.0km    2 people    Cost ?  7.99
+OXF-7NTR43  Hyde Park                    2.0km    1 person    Cost ?  7.98
+LON-ABCDE8  Chelsea Bridge Road          2.0km    1 person    Cost ?  7.98
