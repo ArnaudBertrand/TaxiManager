@@ -3,9 +3,7 @@ package Class;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
-
-import javax.swing.JOptionPane;
+import java.util.HashMap;
 
 public class Manager {
 	/**
@@ -33,7 +31,9 @@ public class Manager {
 	/** List of valid destinations **/
 	private DestinationList validDestinations;
 	
-	//constructor
+	/**
+	 * Constructor
+	 */
 	public Manager(){
 		taxiList = new TaxiList(this);
 		journeyList = new JourneyList(this);
@@ -41,6 +41,9 @@ public class Manager {
 		validDestinations = new DestinationList();
 	}
 	
+	/**
+	 * Run the manager
+	 */
 	public void run(){
 		try {
 			// Import taxi details
@@ -63,14 +66,20 @@ public class Manager {
 		writeReport();
 	}
 	
-
+	/**
+	 * Write reports
+	 */
 	private void writeReport(){
 		writeToFile(PATH_WRITE_COST_BOUNDS,getCostBounds());
 		writeToFile(PATH_WRITE_DRIVER_DEST,getDriverDestinations());
 		writeToFile(PATH_WRITE_DEST_YEAR_REP,getDestSortByYear());
 		System.out.println(getDestSortByYear());
 	}	
-
+	
+	/**
+	 * Get cost bounds
+	 * @return cost bounds
+	 */
 	private String getCostBounds(){
 		// Get all the journeys
 		return journeyList.getAllJourneys();
@@ -111,52 +120,70 @@ public class Manager {
 		StringBuffer sb = new StringBuffer();
 		
 		// Get destination list sorted
-		HashMap<String,Set<Destination>> destRep = destinationsVisited.getYearRepartition(FunctionalConstants.YEAR_2014, FunctionalConstants.YEAR_2015);		
-		Set<Destination> onlyOld = destRep.get(FunctionalConstants.YEAR_2014);
-		Set<Destination> onlyNew = destRep.get(FunctionalConstants.YEAR_2015);
-		Set<Destination> shared = destRep.get(FunctionalConstants.YEAR_BOTH);
+		HashMap<String,DestinationList> destRep = destinationsVisited.getYearRepartition(FunctionalConstants.YEAR_2014, FunctionalConstants.YEAR_2015);		
+		DestinationList onlyOld = destRep.get(FunctionalConstants.YEAR_2014);
+		DestinationList onlyNew = destRep.get(FunctionalConstants.YEAR_2015);
+		DestinationList shared = destRep.get(FunctionalConstants.YEAR_BOTH);
 		
 		// Only new year
-		sb.append(onlyNew.size() + DEST_NEW_PLACES + FunctionalConstants.NEW_LINE);
-		for(Destination dest : onlyNew){
-			sb.append(dest.getName() + FunctionalConstants.NEW_LINE);
-		}
+		sb.append(onlyNew.getSize() + DEST_NEW_PLACES + FunctionalConstants.NEW_LINE);
+		sb.append(onlyNew.getNameList() + FunctionalConstants.NEW_LINE);
 		
 		// Only first year
-		sb.append(onlyOld.size() + DEST_OLD_PLACES + FunctionalConstants.NEW_LINE);
-		for(Destination dest : onlyOld){
-			sb.append(dest.getName() + FunctionalConstants.NEW_LINE);
-		}
+		sb.append(onlyOld.getSize() + DEST_OLD_PLACES + FunctionalConstants.NEW_LINE);
+		sb.append(onlyOld.getNameList() + FunctionalConstants.NEW_LINE);
 		
 		// Both year
-		sb.append(shared.size() + DEST_BOTH_PLACES + FunctionalConstants.NEW_LINE);
-		for(Destination dest : shared){
-			sb.append(dest.getName() + FunctionalConstants.NEW_LINE);
-		}
+		sb.append(shared.getSize() + DEST_BOTH_PLACES + FunctionalConstants.NEW_LINE);
+		sb.append(shared.getNameList());
 		
 		return sb.toString();
 	}
-
+	
+	/**
+	 * Get valid destinations
+	 * @return valid destinations
+	 */
 	public DestinationList getValidDestinations() {
 		return validDestinations;
 	}
 
+	/**
+	 * Set valid destionations
+	 * @param validDestinations valid destinations to set
+	 */
 	public void setValidDestinations(DestinationList validDestinations) {
 		this.validDestinations = validDestinations;
 	}
 	
+	/**
+	 * Get journey list
+	 * @return journey list to get
+	 */
 	public JourneyList getJourneyList() {
 		return journeyList;
 	}
 
+	/**
+	 * Set journey list
+	 * @param journeyList journey list to set
+	 */
 	public void setJourneyList(JourneyList journeyList) {
 		this.journeyList = journeyList;
 	}
 	
+	/** 
+	 * Get destinations visited
+	 * @return visited destinations
+	 */
 	public DestinationsVisited getDestinationsVisited() {
 		return destinationsVisited;
 	}
 
+	/**
+	 * Set destinations visited
+	 * @param destinationsVisited destinations visited to set
+	 */
 	public void setDestinationsVisited(DestinationsVisited destinationsVisited) {
 		this.destinationsVisited = destinationsVisited;
 	}

@@ -6,13 +6,17 @@ import java.util.*;
 
 public class DestinationsVisited {
 
+	/** Destinations visited **/
 	private HashMap<String, DestinationList> destinationsVisited;
+	/** Manager **/
 	private Manager manager;
 	
-	//constructor
+	/** Empty constructor **/
 	public DestinationsVisited (){
 		destinationsVisited = new HashMap<String, DestinationList>();
 	}
+	
+	/** Constructor **/
 	public DestinationsVisited(Manager manager){
 		// Instanciate variables
 		destinationsVisited = new HashMap<String, DestinationList>();
@@ -21,10 +25,18 @@ public class DestinationsVisited {
 		this.manager = manager;		
 	}
 	
+	/**
+	 * Get destinations visited
+	 * @return destinations visited
+	 */
 	public HashMap<String, DestinationList> getDestinationsVisited(){
 		return destinationsVisited;
 	}
 	
+	/**
+	 * Set destinations visited
+	 * @param destVisited visited destinations
+	 */
 	public void setDestinationsVisited(HashMap<String, DestinationList> destVisited){
 		this.destinationsVisited = destVisited;
 	}
@@ -44,53 +56,67 @@ public class DestinationsVisited {
 				processLineDestValid(scanner.nextLine());
 			}
 			if(FunctionalConstants.DEST_VISITED.equals(type)){
-				processLineDestVisited(scanner.nextLine(), this.destinationsVisited.get(year));				
+				processLineDestVisited(scanner.nextLine());				
 			}
 		}
 	}
 	
+	/**
+	 * Process line for valid destination
+	 * @param inputLine
+	 */
 	private void processLineDestValid(String inputLine){
-		String [] parts = inputLine.split(",");
-		Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
-		manager.getValidDestinations().addDestination(dest);
+		try{
+			String [] parts = inputLine.split(",");
+			Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
+			manager.getValidDestinations().addDestination(dest);			
+		} catch (NumberFormatException e) {
+			System.out.println("Error during reading process: " + e.getMessage());
+		}
 	}
 	
-	private void processLineDestVisited(String destName, DestinationList destinationList){
+	/**
+	 * Process line of visited destinations for a year
+	 * @param destName name of the destination
+	 * @param destinationList the destination list to fill
+	 */
+	private void processLineDestVisited(String destName){
 		Destination dest = manager.getValidDestinations().getDest(destName);
 		if(dest != null){
 			addDestForYear(dest,FunctionalConstants.YEAR_2014);			
+		} else {
+			System.out.println("Error during reading proces, destination \"" + destName + "\" not existing");
 		}
 	}
 	
-	public HashMap<String, Set<Destination>> getYearRepartition(String year1, String year2) {
+	/**
+	 * Get the repartition of destinations visited by year
+	 * @param year1 first year to check
+	 * @param year2 second year to check
+	 * @return map containing set of destination for 1st only, 2nd only or shared.
+	 */
+	public HashMap<String, DestinationList> getYearRepartition(String year1, String year2) {
 		// Create result map
-		HashMap<String,Set<Destination>> result = new HashMap<String,Set<Destination>>();
-		Set<Destination> year1Only = new HashSet<Destination>();
-		Set<Destination> year2Only = new HashSet<Destination>();
-		Set<Destination> shared = new HashSet<Destination>();
+		HashMap<String,DestinationList> result = new HashMap<String,DestinationList>();
+		DestinationList year1Only = new DestinationList();
+		DestinationList year2Only = new DestinationList();
+		DestinationList shared = new DestinationList();
 		
-		if(destinationsVisited.get(year1) != null && destinationsVisited.get(year2) != null){
-			Set<Destination> dl1 = destinationsVisited.get(year1).getDestinationList();
-			Set<Destination> dl2 = destinationsVisited.get(year2).getDestinationList();			
-			
-			for(Destination dest : dl1){
-				if(dl2.contains(dest)){
-					// Handle shared
-					shared.add(dest);
-				} else {
-					// Handle year 1 only
-					year1Only.add(dest);
-				}
-			}
-			
-			// Handle year 2 only
-			for(Destination dest : dl2){
-				if(!shared.contains(dest)){
-					year2Only.add(dest);
-				}
-			}
+		// Handle null values
+		DestinationList dl1 = new DestinationList();
+		DestinationList dl2 = new DestinationList();
+		if(destinationsVisited.get(year1) != null ){
+			dl1 = destinationsVisited.get(year1);
+		}
+		if(destinationsVisited.get(year2) != null){
+			dl2 = destinationsVisited.get(year2);
 		}
 		
+		shared = dl1.getSameDestinations(dl2);
+		year1Only = dl1.getDifferentDestinations(shared);
+		year2Only = dl2.getDifferentDestinations(shared);
+		
+		// Set the result map
 		result.put(year1, year1Only);
 		result.put(year2, year2Only);
 		result.put(FunctionalConstants.YEAR_BOTH, shared);
@@ -98,8 +124,15 @@ public class DestinationsVisited {
 		return result;			
 	}
 	
+	/**
+	 * Add destination for a specific year
+	 * @param dest destination to add
+	 * @param year year where you want to add the destination
+	 * @return true if insert false if it already exist
+	 */
 	public boolean addDestForYear(Destination dest, String year){
 		DestinationList dstList = destinationsVisited.get(year);
+		// Handle year not existing
 		if(dstList == null){
 			dstList = new DestinationList();
 			destinationsVisited.put(year, dstList);
