@@ -1,108 +1,107 @@
 ##### Report #####
-
 Text file containing details of which places each driver has visited : 
 
 Alain Delon
-  Wimbledon
-  ZSL London Zoo
+   Wimbledon
+   ZSL London Zoo
 
 Albert Montdor
-  Kensington Palace
+   Kensington Palace
 
 Alexandra Moryousef
-  Wembley Stadium
-  Holborn
+   Wembley Stadium
+   Holborn
 
 Alexandre Paris
-  Victoria Park
-  Burgess Park
+   Victoria Park
+   Burgess Park
 
 Amanda Jones
-  Liverpool
-  Mitcham
-  Marylebone
+   Liverpool
+   Mitcham
+   Marylebone
 
 Anna Clarke
-  Oxford
-  Royal Victoria
-  Saint Pauls
+   Oxford
+   Royal Victoria
+   Saint Pauls
 
 Bob Rija
-  Southampton
-  Chelsea Bridge Road
+   Southampton
+   Chelsea Bridge Road
 
 Chloe Swann
-  Royal Victoria
-  Hyde Park
+   Royal Victoria
+   Hyde Park
 
 Emma Jeanne
-  Dover
-  Wembley Stadium
+   Dover
+   Wembley Stadium
 
 Franck Catinot
-  Manchester
-  Fulham
-  London Bridge
+   Manchester
+   Fulham
+   London Bridge
 
 Francois Le
-  Brixton
-  Camberwell
-  Tower of London
+   Brixton
+   Camberwell
+   Tower of London
 
 Jean Dujardin
-  Greenford
-  Kensington Palace
+   Greenford
+   Kensington Palace
 
 Joe Kent
-  Edinburgh
-  Wimbledon
-  Holborn
+   Edinburgh
+   Wimbledon
+   Holborn
 
 John Smith
-  Watford
-  Greenford
-  Burgess Park
+   Watford
+   Greenford
+   Burgess Park
 
 Ken Drinken
-  Dover
+   Dover
 
 Linda Siu
-  Nottingham
-  Old Street
+   Nottingham
+   Old Street
 
 Marion Cotillard
-  Victoria Avenue
-  Fulham
+   Victoria Avenue
+   Fulham
 
 Maude Annette
-  Clissold Park
-  Brixton
+   Clissold Park
+   Brixton
 
 Nicolas Vielozynski
-  Queen Elizabeths Walk
-  Saint Pauls
+   Queen Elizabeths Walk
+   Saint Pauls
 
 Paul Dupont
-  Birmingham
-  South Kensingthon
+   Birmingham
+   South Kensingthon
 
 Quentin Dupeux
-  Marylebone
+   Marylebone
 
 Romain Clerc
-  ZSL London Zoo
+   ZSL London Zoo
 
 Sofia Antipolis
-  Hyde Park
+   Hyde Park
 
 Tim Kenneth
-  Cambridge
-  Paddington
+   Cambridge
+   Paddington
 
 Victor Deschamps
-  Victoria Avenue
+   Victoria Avenue
 
 Zack Effron
-  Wembley Stadium
-  Camberwell
+   Wembley Stadium
+   Camberwell
 

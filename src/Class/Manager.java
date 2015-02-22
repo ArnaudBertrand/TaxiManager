@@ -92,22 +92,13 @@ public class Manager {
 	 */
 	private String getDriverDestinations(){
 		String report ="";
-		//report += taxiList.getReadingErrors();
 
 		// Generate the DriverDestinations report
-		report += "\n" + "Text file containing details of which places each driver"
+		report += "Text file containing details of which places each driver"
 				+ " has visited : \n\n";
-		
-		//report += "Number of taxis in the list : ";
-		//report += taxiList.getTaxiNb() + "\n";
-		//report += "Driver name for the taxi MAN-24PM24 : ";
-		//report += taxiList.getDriverNameByRegNb("MAN-24PM24") + "\n\n";
-		//report += taxiList.getAllDriverName() + "\n";
 		report += taxiList.getDriverNameAndDest();
 		
-		// Print report in console and send it into a file
-		//System.out.print(report);
-		//taxiList.writeToFile("DriverDestinationsReport.txt", report);
+		// Return the report
 		return report;
 
 	}

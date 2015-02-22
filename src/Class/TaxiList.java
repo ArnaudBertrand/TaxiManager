@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Class regrouping taxis into a list
  * @author pgm1
- * @version 17/02/2015
+ * @version 22/02/2015
  */
 public class TaxiList {
 
@@ -17,10 +17,12 @@ public class TaxiList {
 	private TreeSet<Taxi> taxiList = new TreeSet<Taxi>();
 	/** Reading errors **/
 	String readingErrors;
+	/** Manager **/
 	private Manager manager;
 	
 	/**
-	 * Constructor of taxi list
+	 * Constructor
+	 * @param manager Manager
 	 */
 	public TaxiList(Manager manager){	
 		this.taxiList = new TreeSet<Taxi>();
@@ -38,6 +40,7 @@ public class TaxiList {
 	
 	/**
 	 * Set the taxi list
+	 * @param taxiList the taxi list to set
 	 */
 	public void setTaxiList(TreeSet<Taxi> taxiList){
 		this.taxiList = taxiList;
@@ -52,9 +55,9 @@ public class TaxiList {
 	}
 	
 	/**
-	 * Get the taxi from the registration number
+	 * Get the taxi from his registration number
 	 * @param regNb the registration number of the taxi to get
-	 * @return the taxi
+	 * @return the taxi with the registration number corresponding
 	 */
 	public Taxi getTaxiByRegNb(String regNb){
 		
@@ -73,18 +76,18 @@ public class TaxiList {
 	/**
 	 * Get the driver name from the registration number of a taxi
 	 * @param regNb the registration number of the taxi
-	 * @return the driver name
+	 * @return the driver name of the taxi with the registration number corresponding
 	 */
 	public String getDriverNameByRegNb(String regNb){
 		
-		String dv = "";
+		String driver = "";
 		for (Taxi t : taxiList) {
 			if(regNb.equals(t.getRegNb())){
-				dv = t.getDriverName();
+				driver = t.getDriverName();
 				break;
 			}
 		}
-		return dv;
+		return driver;
 	}
 	
 	/**
@@ -101,21 +104,27 @@ public class TaxiList {
 	}
 	
 	/**
-	 * Get the destination for each driver name of the list of taxis
+	 * Get the destinations for each driver name of the list of taxis
 	 * @return all the destinations by driver name
 	 */
 	public String getDriverNameAndDest(){
 		
+		// instance a String to return at the end
 		String driverNameDest = "";
+		// for each taxi of the list
 		for (Taxi t : taxiList) {
+			// we get the driver name
 			driverNameDest += t.getDriverName() + "\n";
+			// we get all destinations for this taxi
 			ArrayList<String> journeys = manager.getJourneyList().getDestinationsForTaxi(t);
+			// and we add each destination of this taxi in the String
 			for(String j : journeys)
 			{
-				driverNameDest += "  " + j + "\n";	
+				driverNameDest += "   " + j + "\n";	
 			}
 			driverNameDest += "\n";
 		}
+		//return the String of all destinations for each taxi
 		return driverNameDest;
 	}
 	
