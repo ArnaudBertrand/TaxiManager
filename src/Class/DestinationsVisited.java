@@ -24,54 +24,19 @@ public class DestinationsVisited {
 		// Set valid destinations
 		this.manager = manager;		
 	}
-	
-	/**
-	 * Get destinations visited
-	 * @return destinations visited
-	 */
-	public HashMap<String, DestinationList> getDestinationsVisited(){
-		return destinationsVisited;
-	}
-	
-	/**
-	 * Set destinations visited
-	 * @param destVisited visited destinations
-	 */
-	public void setDestinationsVisited(HashMap<String, DestinationList> destVisited){
-		this.destinationsVisited = destVisited;
-	}
-	
+		
 	/**
 	 * Read a file
 	 * @param fileName path of the file to read
 	 * @throws FileNotFoundException 
 	 */
 	@SuppressWarnings("resource")
-	public void readFile(String fileName, String type, String year) throws FileNotFoundException{
+	public void readFile(String fileName, String year) throws FileNotFoundException{
 		File f = new File(fileName);
 		Scanner scanner = new Scanner(f);
 		// Process each line
 		while (scanner.hasNextLine()) {
-			if((FunctionalConstants.DEST_VALID).equals(type)){
-				processLineDestValid(scanner.nextLine());
-			}
-			if(FunctionalConstants.DEST_VISITED.equals(type)){
-				processLineDestVisited(scanner.nextLine());				
-			}
-		}
-	}
-	
-	/**
-	 * Process line for valid destination
-	 * @param inputLine
-	 */
-	private void processLineDestValid(String inputLine){
-		try{
-			String [] parts = inputLine.split(",");
-			Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
-			manager.getValidDestinations().addDestination(dest);			
-		} catch (NumberFormatException e) {
-			System.out.println("Error during reading process: " + e.getMessage());
+			processLineDestVisited(scanner.nextLine());
 		}
 	}
 	

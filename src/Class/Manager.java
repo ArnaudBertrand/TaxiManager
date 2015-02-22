@@ -1,9 +1,11 @@
 package Class;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Manager {
 	/**
@@ -50,14 +52,13 @@ public class Manager {
 			taxiList.readFile(PATH_READ_TAXI_DETAILS);
 			
 			// Import valid destinations
-			destinationsVisited.readFile(PATH_READ_DEST_VALID, FunctionalConstants.DEST_VALID, null);
+			this.readFile(PATH_READ_DEST_VALID);
 
 			// Import JourneyList
 			journeyList.readFile(PATH_READ_DEST_JOURNEY);
 			
-			
 			// Import destinations of 2014
-			destinationsVisited.readFile(PATH_READ_DEST_2014, FunctionalConstants.DEST_VISITED, FunctionalConstants.YEAR_2014);
+			destinationsVisited.readFile(PATH_READ_DEST_2014, FunctionalConstants.YEAR_2014);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -193,7 +194,7 @@ public class Manager {
 	 * @param filename path of the file to write in
 	 * @param report report to write in the file
 	 */
-	public void writeToFile(String filename, String report) {
+	private void writeToFile(String filename, String report) {
 		FileWriter fw;
 		try {
 		    fw = new FileWriter(filename);
@@ -213,5 +214,27 @@ public class Manager {
 		    System.exit(1);
 		 }
 	}
+	
+	/**
+	 * Read a file
+	 * @param fileName path of the file to read
+	 * @throws FileNotFoundException 
+	 */
+	@SuppressWarnings("resource")
+	private void readFile(String fileName) throws FileNotFoundException{
+		File f = new File(fileName);
+		Scanner scanner = new Scanner(f);
+		// Process each line
+		while (scanner.hasNextLine()) {
+			try{
+				String [] parts = scanner.nextLine().split(",");
+				Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
+				validDestinations.addDestination(dest);			
+			} catch (NumberFormatException e) {
+				System.out.println("Error during reading process: " + e.getMessage());
+			}
+		}
+	}
+	
 }
 
