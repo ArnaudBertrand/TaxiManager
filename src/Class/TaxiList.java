@@ -2,9 +2,10 @@ package Class;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  * Class regrouping taxis into a list
@@ -74,36 +75,6 @@ public class TaxiList {
 	}
 	
 	/**
-	 * Get the driver name from the registration number of a taxi
-	 * @param regNb the registration number of the taxi
-	 * @return the driver name of the taxi with the registration number corresponding
-	 */
-	public String getDriverNameByRegNb(String regNb){
-		
-		String driver = "";
-		for (Taxi t : taxiList) {
-			if(regNb.equals(t.getRegNb())){
-				driver = t.getDriverName();
-				break;
-			}
-		}
-		return driver;
-	}
-	
-	/**
-	 * Get all the driver name of the list of taxis
-	 * @return all the driver name of the list
-	 */
-	public String getAllDriverName(){
-		
-		String allDriverName = "";
-		for (Taxi t : taxiList) {
-			allDriverName += t.getDriverName() + " : " + t.getRegNb() + "\n";
-		}
-		return allDriverName;
-	}
-	
-	/**
 	 * Get the destinations for each driver name of the list of taxis
 	 * @return all the destinations by driver name
 	 */
@@ -112,15 +83,18 @@ public class TaxiList {
 		// instance a String to return at the end
 		String driverNameDest = "";
 		// for each taxi of the list
-		for (Taxi t : taxiList) {
+		Iterator<Taxi> i = taxiList.iterator();
+		while (i.hasNext()) {
+			Taxi t = i.next();
 			// we get the driver name
 			driverNameDest += t.getDriverName() + "\n";
 			// we get all destinations for this taxi
 			ArrayList<String> journeys = manager.getJourneyList().getDestinationsForTaxi(t);
 			// and we add each destination of this taxi in the String
-			for(String j : journeys)
+			Iterator<String> i2 = journeys.iterator();
+			while(i2.hasNext())
 			{
-				driverNameDest += "   " + j + "\n";	
+				driverNameDest += "   " + i2.next() + "\n";	
 			}
 			driverNameDest += "\n";
 		}
@@ -163,6 +137,7 @@ public class TaxiList {
 	 * Read a file
 	 * @param fileName path of the file to read
 	 */
+	@SuppressWarnings("resource")
 	public void readFile(String fileName) throws FileNotFoundException{
 		File f = new File(fileName);
 		Scanner scanner = new Scanner(f);
@@ -174,44 +149,6 @@ public class TaxiList {
 				processLine(inputLine);		
 			}	
 		}
-	}
-	
-	/**
-	 * Write a report into a file
-	 * @param filename path of the file to write in
-	 * @param report report to write in the file
-	 */
-	public void writeToFile(String filename, String report) {
-		 FileWriter fw;
-		 try {
-		    fw = new FileWriter(filename);
-		    fw.write("##### Report #####\n");
-		    fw.write(report);
-		 	fw.close();
-		 }
-		 //message and stop if file not found
-		 catch (FileNotFoundException fnf){
-			 System.out.println(filename + " not found ");
-			 System.exit(0);
-		 }
-		 //stack trace here because we don't expect to come here
-		 catch (IOException ioe){
-		    ioe.printStackTrace();
-		    System.exit(1);
-		 }
-	}
-	
-	/**
-	 * Get errors of the reading process
-	 * @return list of errors that happened during reading process
-	 */
-	public String getReadingErrors(){
-		String readFileErrors = "";
-		if(this.readingErrors != null){
-			readFileErrors = ">> Errors detected during reading process\n";
-			readFileErrors += this.readingErrors;
-		}
-		return readFileErrors;
 	}
 	
 	/**

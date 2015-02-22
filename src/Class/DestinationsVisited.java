@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DestinationsVisited {
-
+	/** Instanciate variables **/
+	private static final String ERROR_READING = "Error during reading proces, destination not existing: ";
+	
 	/** Destinations visited **/
 	private HashMap<String, DestinationList> destinationsVisited;
 	/** Manager **/
@@ -50,7 +52,7 @@ public class DestinationsVisited {
 		if(dest != null){
 			addDestForYear(dest,FunctionalConstants.YEAR_2014);			
 		} else {
-			System.out.println("Error during reading proces, destination \"" + destName + "\" not existing");
+			System.out.println(ERROR_READING + destName);
 		}
 	}
 	

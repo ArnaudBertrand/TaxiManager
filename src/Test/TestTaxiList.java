@@ -62,67 +62,15 @@ public class TestTaxiList {
 		msg = "Should return null for null element (not in the list)";
 		assertEquals(msg,null,taxiList.getTaxiByRegNb(""));
 		msg = "Should return null for non-existing element (not in the list)";
-		assertEquals(msg,null,taxiList.getTaxiByRegNb("NotExisting"));
-		
-		// Test getDriverNameByRegNb
-		msg = "Failed to get element from list";
-		assertEquals(msg,"Nick Clarck",taxiList.getDriverNameByRegNb("LON-HHFFSS"));
-		msg = "Should return nothing for null element (not in the list)";
-		assertEquals(msg,"",taxiList.getDriverNameByRegNb(""));
-		msg = "Should return nothing for non-existing element (not in the list)";
-		assertEquals(msg,"",taxiList.getDriverNameByRegNb("NotExisting"));
-		
+		assertEquals(msg,null,taxiList.getTaxiByRegNb("NotExisting"));		
 	}
 	
-	@Test
-	public void testGetAllDriverName() {
-		
-		Manager man = new Manager();
-		TaxiList taxiList = new TaxiList(man);
-		
-		// Empty list
-		String msg = "Fail on empty list return empty string";
-		assertEquals(msg, "", taxiList.getAllDriverName());
-		
-		// Create taxi list
-		taxiList.addTaxi(new Taxi("Jean De Bourg", "LON-1649GF"));
-		taxiList.addTaxi(new Taxi("Johnny Bigor", "LON-990055"));
-		taxiList.addTaxi(new Taxi("Nina Swarowski", "MAN-NN1789"));
-		
-		// Test list with good data
-		msg = "Success on filled list";
-		String expectedList = "Jean De Bourg : LON-1649GF\n"
-							+ "Johnny Bigor : LON-990055\n"
-							+ "Nina Swarowski : MAN-NN1789\n";
-		
-		boolean inArray = false;
-		String nameList = taxiList.getAllDriverName();
-		if(expectedList.equals(nameList)){
-			inArray = true;
-		}
-		assertTrue(msg, inArray);
-
-		// Test list with wrong data
-		msg = "Failed on filled list";
-		String expectedList2 = "Jean De Bourg : LON-1649GF\n"
-				+ "Johnny Bigor : LON-990055\n"
-				+ "Nina Swarowski : MAN-NN1789\n"
-				+ "Not existing : not existing\n";
-
-		boolean inArray2 = false;
-		String nameList2 = taxiList.getAllDriverName();
-		if(expectedList2.equals(nameList2)){
-			inArray2 = true;
-		}
-		assertFalse(msg, inArray2);
-	}
-
 	@Test
 	public void testGetDriverNameAndDest() {
 		
 		Manager man = new Manager();
-		TaxiList taxiList = new TaxiList(man);
-		JourneyList journeyList = new JourneyList(man);
+		TaxiList taxiList = man.getTaxiList();
+		JourneyList journeyList = man.getJourneyList();
 		
 		// Empty list
 		String msg = "Fail on empty list return empty string";
@@ -144,27 +92,19 @@ public class TestTaxiList {
 		journeyList.addJourney(new Journey(taxi1, dest2, 2));
 		journeyList.addJourney(new Journey(taxi1, dest3, 3));
 		journeyList.addJourney(new Journey(taxi2, dest2, 4));
-
-		//il faudrait que journeyList soit pris en compte ici:
 		
 		
 		// Test list with good data
 		msg = "Success on filled list";
 		String expectedList = "Nick Clarck\n"
-				+ "   " + "Londres\n"
+				+ "   " + "Londres\n\n"
 				+ "Nina Swarowski\n"
+				+ "   " + "Paris\n"
 				+ "   " + "Londres\n"
-				+ "   " + "NYC\n"
-				+ "   " + "Paris\n";
-
-		boolean inArray = false;
+				+ "   " + "NYC\n\n";
+		
 		String currentList = taxiList.getDriverNameAndDest();
-		System.out.println(currentList);
-		System.out.println(expectedList);
-		if(expectedList.equals(currentList)){
-			inArray = true;
-		}
-		//assertTrue(msg, inArray);
+		assertTrue(msg, expectedList.equals(currentList));
 
 
 	}

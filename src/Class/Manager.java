@@ -11,18 +11,23 @@ public class Manager {
 	/**
 	 * Initialize constants
 	 */
-	public static final String PATH_READ_TAXI_DETAILS = "TaxiDetails.txt";
-	public static final String PATH_READ_DEST_VALID = "ValidDestinations.txt";
-	public static final String PATH_READ_DEST_2014 = "VisitedDestination.txt";
-	public static final String PATH_READ_DEST_JOURNEY = "JourneyDetails.txt";
+	// Path for input files
+	private static final String PATH_READ_TAXI_DETAILS = "TaxiDetails.txt";
+	private static final String PATH_READ_DEST_VALID = "ValidDestinations.txt";
+	private static final String PATH_READ_DEST_2014 = "VisitedDestination.txt";
+	private static final String PATH_READ_DEST_JOURNEY = "JourneyDetails.txt";
 	
-	public static final String PATH_WRITE_COST_BOUNDS = "CostBoundsReport.txt";
-	public static final String PATH_WRITE_DRIVER_DEST= "DriverDestinationsReport.txt";
-	public static final String PATH_WRITE_DEST_YEAR_REP = "DestYearRepReport.txt";
+	// Path for output files
+	private static final String PATH_WRITE_COST_BOUNDS = "CostBoundsReport.txt";
+	private static final String PATH_WRITE_DRIVER_DEST= "DriverDestinationsReport.txt";
+	private static final String PATH_WRITE_DEST_YEAR_REP = "DestYearRepReport.txt";
 	
-	public static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
-	public static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
-	public static final String DEST_BOTH_PLACES = " PLACES VISITED IN BOTH 2014 AND 2015";
+	// Strings constant
+	private static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
+	private static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
+	private static final String DEST_BOTH_PLACES = " PLACES VISITED IN BOTH 2014 AND 2015";
+	private static final String HEADER_DRIVER_DEST = "Text file containing details of which places each driver has visited: ";
+	private static final String ERROR_READING = "Error during reading process: ";
 	
 	/** List of taxis **/
 	private TaxiList taxiList;
@@ -74,7 +79,6 @@ public class Manager {
 		writeToFile(PATH_WRITE_COST_BOUNDS,getCostBounds());
 		writeToFile(PATH_WRITE_DRIVER_DEST,getDriverDestinations());
 		writeToFile(PATH_WRITE_DEST_YEAR_REP,getDestSortByYear());
-		System.out.println(getDestSortByYear());
 	}	
 	
 	/**
@@ -91,16 +95,12 @@ public class Manager {
 	 * @return string containing list of destinations sorted
 	 */
 	private String getDriverDestinations(){
-		String report ="";
-
 		// Generate the DriverDestinations report
-		report += "Text file containing details of which places each driver"
-				+ " has visited : \n\n";
+		String report = HEADER_DRIVER_DEST + FunctionalConstants.NEW_LINE + FunctionalConstants.NEW_LINE;
 		report += taxiList.getDriverNameAndDest();
 		
 		// Return the report
 		return report;
-
 	}
 	
 	/**
@@ -146,6 +146,22 @@ public class Manager {
 	 */
 	public void setValidDestinations(DestinationList validDestinations) {
 		this.validDestinations = validDestinations;
+	}
+	
+	/**
+	 * Get taxi list
+	 * @return taxi list to get
+	 */
+	public TaxiList getTaxiList() {
+		return taxiList;
+	}
+
+	/**
+	 * Set journey list
+	 * @param journeyList journey list to set
+	 */
+	public void setTaxiList(TaxiList taxiList) {
+		this.taxiList = taxiList;
 	}
 	
 	/**
@@ -222,7 +238,7 @@ public class Manager {
 				Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
 				validDestinations.addDestination(dest);			
 			} catch (NumberFormatException e) {
-				System.out.println("Error during reading process: " + e.getMessage());
+				System.out.println(ERROR_READING + e.getMessage());
 			}
 		}
 	}
