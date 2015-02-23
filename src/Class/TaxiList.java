@@ -62,13 +62,15 @@ public class TaxiList {
 	public Taxi getTaxiByRegNb(String regNb){
 		
 		Taxi taxi = null;
-		Iterator<Taxi> taxiIterator = taxiList.iterator();
-		while(taxiIterator.hasNext()){
-			Taxi currentTaxi = taxiIterator.next();
-			if(regNb.equals(currentTaxi.getRegNb())){
-				taxi = currentTaxi;
-				break;
-			}
+		if(regNb != null){
+			Iterator<Taxi> taxiIterator = taxiList.iterator();
+			while(taxiIterator.hasNext()){
+				Taxi currentTaxi = taxiIterator.next();
+				if(regNb.equals(currentTaxi.getRegNb())){
+					taxi = currentTaxi;
+					break;
+				}
+			}			
 		}
 		return taxi;
 	}
@@ -107,7 +109,7 @@ public class TaxiList {
 	 * @return 1 success - 0 fail
 	 */
 	public boolean addTaxi(Taxi t) {
-		return taxiList.add(t);	
+		return t != null ? taxiList.add(t) : false;	
 	}
 	
 	/**
@@ -157,7 +159,7 @@ public class TaxiList {
 	 * @param regNb the registration number of the taxi to remove
 	 * @return 1 success - 0 fail
 	 */
-	public boolean removeTaxi(String regNb){
+	public boolean removeTaxiByRegNb(String regNb){
 		boolean success = false;
 		Taxi taxiToRem = this.getTaxiByRegNb(regNb);
 		if(taxiToRem != null){

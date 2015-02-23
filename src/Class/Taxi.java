@@ -18,6 +18,8 @@ public class Taxi implements Comparable<Taxi> {
 	private int nbOfSeats;
 	/** Regex **/
 	private static final String REGEX_REG_NB = "[A-Z]{3}-[A-Z0-9]{6}";
+	/** Errors **/
+	private static final String ERROR_NULL_ARGUMENT = "Driver name and reg number should not be null";
 	
 	/**
 	 * Constructor
@@ -26,13 +28,15 @@ public class Taxi implements Comparable<Taxi> {
 	 * @throws RegNbFormatException 
 	 */
 	public Taxi(String driverName, String regNb) throws RegNbFormatException{	
-		this.driverName = driverName;
-		
+		if(driverName == null || regNb == null){
+			throw new NullPointerException(ERROR_NULL_ARGUMENT);
+		}
 		Pattern regex = Pattern.compile(REGEX_REG_NB);
 		Matcher match = regex.matcher(regNb);
 		if(regNb.length() != 10 || !match.find()){
 			throw new RegNbFormatException(regNb);
 		}
+		this.driverName = driverName;
 		this.regNb = regNb;			
 		
 		//Set default value for nbOfSeats can be handled later in the input file
