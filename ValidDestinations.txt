@@ -41,3 +41,12 @@ Shadwell, 6,4
 Cannon Street, 2,1
 Walworth, 7,9
 Forest Hill, 2,6
+Milan, two
+New York, -123
+Nice, 0
+China, three thousands
+Tokyo, -0
+Dijon, 2.4
+Lyon, ç!à
+London Bridge, 5
+London Bridge, 9
