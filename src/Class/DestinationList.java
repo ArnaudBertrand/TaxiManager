@@ -2,7 +2,9 @@ package Class;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -27,7 +29,11 @@ public class DestinationList {
 	 * @return true if inserted false if already exists
 	 */
 	public boolean addDestination(Destination dest){
-		return destinationList.add(dest);
+		boolean added = false;
+		if(dest != null){
+			added = destinationList.add(dest);
+		}
+		return added;
 	}
 
 	/**
@@ -69,7 +75,7 @@ public class DestinationList {
 	public DestinationList getDifferentDestinations(DestinationList other){
 		DestinationList dstList = new DestinationList();
 		for(Destination dst : destinationList){
-			if(!other.contains(dst)){
+			if(other != null && !other.contains(dst)){
 				dstList.addDestination(dst);
 			}
 		}
@@ -99,8 +105,9 @@ public class DestinationList {
 	 */
 	public String getNameList() {
 		String destList = "";
-		for(Destination dest : destinationList){
-			destList += dest.getName() + FunctionalConstants.NEW_LINE;
+		Iterator<Destination> i = destinationList.iterator();
+		while(i.hasNext()){
+			destList += i.next().getName() + FunctionalConstants.NEW_LINE;
 		}
 		return destList;
 	}

@@ -7,7 +7,7 @@ import java.util.*;
 public class DestinationsVisited {
 	/** Instanciate variables **/
 	private static final String ERROR_READING = "Error during reading proces, destination not existing: ";
-	private static final String ERROR_ADDING_NULL_DEST = "Error trying to add null destination in destinations visited";
+	private static final String ERROR_ADD_NULL_DEST_OR_YEAR = "Error trying to add null destination or year in destinations visited";
 	
 	/** Destinations visited **/
 	private HashMap<String, DestinationList> destinationsVisited;
@@ -94,7 +94,7 @@ public class DestinationsVisited {
 	 */
 	public boolean addDestForYear(Destination dest, String year){
 		boolean added = false;
-		if(dest != null){
+		if(dest != null && year != null){
 			DestinationList dstList = destinationsVisited.get(year);
 			// Handle year not existing
 			if(dstList == null){
@@ -103,7 +103,7 @@ public class DestinationsVisited {
 			}
 			added = dstList.addDestination(dest);			
 		} else{
-			System.out.println(ERROR_ADDING_NULL_DEST);
+			System.out.println(ERROR_ADD_NULL_DEST_OR_YEAR);
 		}
 		return added;
 	}

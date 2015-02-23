@@ -6,7 +6,8 @@ public class Destination {
 	/** Distance **/
 	private double distance;
 	/** Errors **/
-	private final static String ERROR_CONST_DISTANCE = "Distance cannot be negative: name: ";
+	private final static String ERROR_CONST_DISTANCE = "Argument distance is negative: ";
+	private final static String ERROR_NAME_NULL =  "Argument name is null";
 	
 	/** Basic constructor **/
 	public Destination(){
@@ -20,6 +21,9 @@ public class Destination {
 	public Destination(String name, double distance) throws IllegalArgumentException{
 		if(distance < 0){
 			throw new IllegalArgumentException(ERROR_CONST_DISTANCE + distance);
+		}
+		if(name == null){
+			throw new NullPointerException(ERROR_NAME_NULL);
 		}
 		this.name = name;
 		this.distance = distance;
