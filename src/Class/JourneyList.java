@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Class regrouping journeys into an ArrayList
@@ -117,7 +119,7 @@ public class JourneyList {
 	 *            journey to add
 	 */
 	public boolean addJourney(Journey j) {
-		return journeyList.add(j);
+		return j != null ? journeyList.add(j) : false;
 	}
 
 	/**
@@ -192,20 +194,22 @@ public class JourneyList {
 	 * 
 	 * @return string of journeys
 	 */
-	public ArrayList<String> getDestinationsForTaxi(Taxi t) {
-
-		ArrayList<String> journeys = new ArrayList<String>();
-		String regNb = t.getRegNb();
-		// Go through the JourneyList
-		Iterator<Journey> j = journeyList.iterator();
-		while (j.hasNext()) {
-			// For each journey
-			Journey currentJourney = j.next();
-			String taxiNb = currentJourney.getTaxi().getRegNb();
-			if (taxiNb.equals(regNb)) {
-				String destination = currentJourney.getDestination().getName();
-				journeys.add(destination);
-			}
+	public Set<String> getDestinationsForTaxi(Taxi t) {
+		
+		Set<String> journeys = new TreeSet<String>();
+		if(t != null){
+			String regNb = t.getRegNb();
+			// Go through the JourneyList
+			Iterator<Journey> j = journeyList.iterator();
+			while (j.hasNext()) {
+				// For each journey
+				Journey currentJourney = j.next();
+				String taxiNb = currentJourney.getTaxi().getRegNb();
+				if (taxiNb.equals(regNb)) {
+					String destination = currentJourney.getDestination().getName();
+					journeys.add(destination);
+				}
+			}			
 		}
 		return journeys;
 	}

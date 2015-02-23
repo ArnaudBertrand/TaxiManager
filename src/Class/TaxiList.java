@@ -2,9 +2,9 @@ package Class;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -88,7 +88,7 @@ public class TaxiList {
 			// we get the driver name
 			driverNameDest += t.getDriverName() + "\n";
 			// we get all destinations for this taxi
-			ArrayList<String> journeys = manager.getJourneyList().getDestinationsForTaxi(t);
+			Set<String> journeys = manager.getJourneyList().getDestinationsForTaxi(t);
 			// and we add each destination of this taxi in the String
 			Iterator<String> i2 = journeys.iterator();
 			while(i2.hasNext())

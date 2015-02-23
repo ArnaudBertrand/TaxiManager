@@ -4,7 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,39 +20,42 @@ import Class.Taxi;
 
 public class TestJourneyList {
 
-	Manager M1 = new Manager();
-	JourneyList JL = new JourneyList(M1);
-	ArrayList<Journey> journeyList = new ArrayList<Journey>();
+	Manager manager = new Manager();
+	JourneyList jL = new JourneyList(manager);
+	
 	// For this test, we suppose that the taxis are valid ones
 	
-	Destination d1,d2,d3,d4;
-	Taxi t;
-	Journey j1,j2,j3,j4,j11,j12,j13,j14,j15,j16,j17,j18,j19,j20,j21;
+	Destination d1 = new Destination("Manchester", 35),
+			d3 = new Destination("Edinburgh", 100),
+			d4 = new Destination("Liverpool", 78);
+	
+	Taxi t1,t2;
+	Journey j1,j2,j3,j4,j5,j6,j7,j8,j9,j10,j11,j12;
 	
 	@Before public void initialize() {
 		try {
-			t = new Taxi("Bob", "LON-XFDERT");
+			t1 = new Taxi("Bob", "LON-XFDERT");
+			t2 = new Taxi("bobi","LON-XFDEEE");
 			// Destinations
-			d1 = new Destination("Manchester", 35);
-			d2 = null;
-			d3 = new Destination("Edinburgh", 100);
-			d4 = new Destination("Liverpool", 78);
 			// Journeys
-			j1 = new Journey(t, d1, 6);
-			j2 = new Journey(t, d2, 4);
-			j3 = new Journey(t, d1, 7);
-			j4 = new Journey(t, d1, -1);
-			j11 = new Journey(t, d1, 1);
-			j12 = new Journey(t, d1, 2);
-			j13 = new Journey(t, d1, 3);
-			j14 = new Journey(t, d1, 4);
-			j15 = new Journey(t, d4, 1);
-			j16 = new Journey(t, d4, 2);
-			j17 = new Journey(t, d4, 3);
-			j18 = new Journey(t, d4, 4);
-			j19 = new Journey(t, d3, 1);
-			j20 = new Journey(t, d3, 2);
-			j21 = new Journey(t, d3, 3);
+			j1 = new Journey(t1, d1, 3);
+			j2 = new Journey(t1, d1, 1);
+			j3 = new Journey(t1, d1, 2);
+			j4 = new Journey(t1, d1, 3);
+			j5 = new Journey(t1, d1, 4);
+			j6 = new Journey(t1, d4, 1);
+			j7 = new Journey(t1, d4, 2);
+			j8 = new Journey(t1, d4, 3);
+			j9 = new Journey(t1, d4, 4);
+			j10 = new Journey(t1, d3, 1);
+			j11 = new Journey(t1, d3, 2);
+			j12 = new Journey(t1, d3, 3);
+			
+			jL.addJourney(j2); //fee 40.65
+			jL.addJourney(j3); //fee 41.65
+			jL.addJourney(j4); //fee 42.65
+			jL.addJourney(j5); //fee 43.65
+
 		} catch (RegNbFormatException e) {
 			e.printStackTrace();
 		}
@@ -59,28 +63,20 @@ public class TestJourneyList {
 
 	@Test
 	public void testAddJourneyToJourneyList() {
-		// Should add j1
-		assertTrue("error to add j1", JL.addJourney(j1));
+		// Null
+		assertFalse("Should not add null", jL.addJourney(null));
 		
-		// Should not add j2 because destination is null
-		assertFalse("should not add j2", JL.addJourney(j2));
+		// Random value
+		assertTrue("Should allow valid entry", jL.addJourney(j1));
 		
-		// Should not add j3 because number of passenger > 6
-		assertFalse("should not add j3", JL.addJourney(j3));
-		
-		// Should not add j4 because number of passenger < 0
-		assertFalse("should not add j4", JL.addJourney(j4));
+		// Dupplicate
+		assertTrue("Should allow dupplicate", jL.addJourney(j1));
 	}
 
 	@Test
 	public void testGetAllJourneys(){
 		// Test nb journey inferior at 5
-		JL.addJourney(j11); //fee 40.65
-		JL.addJourney(j12); //fee 41.65
-		JL.addJourney(j13); //fee 42.65
-		JL.addJourney(j14); //fee 43.65
-		
-		String ExceptedList = "CHARGES FOR THE TOP 5 JOURNEYS \n"
+		String expectedList = "CHARGES FOR THE TOP 5 JOURNEYS \n"
 				+ "LON-XFDERT  Manchester                  35.0km    4 people      Cost "+FunctionalConstants.POUNDS+" 43.65\n"
 				+ "LON-XFDERT  Manchester                  35.0km    3 people      Cost "+FunctionalConstants.POUNDS+" 42.65\n"
 				+ "LON-XFDERT  Manchester                  35.0km    2 people      Cost "+FunctionalConstants.POUNDS+" 41.65\n"
@@ -91,19 +87,19 @@ public class TestJourneyList {
 				+ "LON-XFDERT  Manchester                  35.0km    2 people      Cost "+FunctionalConstants.POUNDS+" 41.65\n"
 				+ "LON-XFDERT  Manchester                  35.0km    1 person      Cost "+FunctionalConstants.POUNDS+" 40.65\n";
 		
-		assertEquals("should be equal",ExceptedList, JL.getAllJourneys());
+		assertEquals("Strings should be equal, take a look in debug mode",expectedList, jL.getAllJourneys());
 
-		// Add eleven journeys (10 would have been enough)
-		JL.addJourney(j15); //fee 84.22
-		JL.addJourney(j16); //fee 86.22
-		JL.addJourney(j17); //fee 88.22
-		JL.addJourney(j18); //fee 90.22
-		JL.addJourney(j19); //fee 106.00
-		JL.addJourney(j20); //fee 108.00
-		JL.addJourney(j21); //fee 110.00
+		// Test with > 5
+		jL.addJourney(j6); //fee 84.22
+		jL.addJourney(j7); //fee 86.22
+		jL.addJourney(j8); //fee 88.22
+		jL.addJourney(j9); //fee 90.22
+		jL.addJourney(j10); //fee 106.00
+		jL.addJourney(j11); //fee 108.00
+		jL.addJourney(j12); //fee 110.00
 		
-		//Excepted result
-		ExceptedList = "CHARGES FOR THE TOP 5 JOURNEYS \n"
+		// Expected result
+		expectedList = "CHARGES FOR THE TOP 5 JOURNEYS \n"
 				+ "LON-XFDERT  Edinburgh                  100.0km    3 people      Cost "+FunctionalConstants.POUNDS+"110.00\n"
 				+ "LON-XFDERT  Edinburgh                  100.0km    2 people      Cost "+FunctionalConstants.POUNDS+"108.00\n"
 				+ "LON-XFDERT  Edinburgh                  100.0km    1 person      Cost "+FunctionalConstants.POUNDS+"106.00\n"
@@ -117,6 +113,31 @@ public class TestJourneyList {
 				+ "LON-XFDERT  Manchester                  35.0km    1 person      Cost "+FunctionalConstants.POUNDS+" 40.65\n";
 		
 		//Test
-		assertEquals("should be equal",ExceptedList, JL.getAllJourneys());
-}
+		assertEquals("Strings should be equal, take a look in debug mode",expectedList, jL.getAllJourneys());
+	}
+	
+	@Test
+	public void testGetDestination(){
+		jL = new JourneyList(manager);
+		Set<String> expected = new TreeSet<String>();
+		
+		// Null
+		String msg = "Should return an empty array list";
+		assertEquals(msg,expected,jL.getDestinationsForTaxi(null));
+		
+		// Not existing
+		assertEquals(msg,expected,jL.getDestinationsForTaxi(t2));
+		
+		// Existing
+		msg = "Should return an array list equals to expected";
+		jL.addJourney(j2);
+		jL.addJourney(j7);
+		jL.addJourney(j8);
+		jL.addJourney(j10);
+		jL.addJourney(j11);
+		expected.add("Manchester");
+		expected.add("Edinburgh");
+		expected.add("Liverpool");
+		assertEquals(msg,expected,jL.getDestinationsForTaxi(t1));
+	}
 }

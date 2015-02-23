@@ -40,20 +40,15 @@ public class TestJourneyComparator {
 	}
 	
 	@Test
-	public void testCompareJourneysFee1() {
+	public void testCompareJourneysFee() {
+		// Identical
 		String mess = "Expect to be 0 for identical";
 		assertEquals(mess, 0, JC.compare(j1, j3));
-	}
-	
-	@Test
-	public void testCompareJourneysFee2() {
-		String mess = "fee j1 < fee j2 => result should be 1";
+		// After
+		mess = "fee j1 < fee j2 => result should be 1";
 		assertEquals(mess, 1, JC.compare(j1, j2));
-	}
-	
-	@Test
-	public void testCompareJourneysFee3() {
-		String mess = "fee j2 > fee j3 => result should be -1";
+		// Before
+		mess = "fee j2 > fee j3 => result should be -1";
 		assertEquals(mess, -1, JC.compare(j2, j3));
 	}
 
