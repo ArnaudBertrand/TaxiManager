@@ -30,9 +30,9 @@ public class TestDestination {
 		// Test compare
 		mess = "Expect to be 0 for identical";
 		assertEquals(mess,0,dest1.compare(dest1, dest2));
-		mess = "L > M result should be -1";
+		mess = "L before M result should be -1";
 		assertEquals(mess,-1,dest1.compare(dest1, dest3));
-		mess = "M < L result should be 1";
+		mess = "M after L result should be 1";
 		assertEquals(mess,1,dest1.compare(dest3, dest1));
 	}
 }

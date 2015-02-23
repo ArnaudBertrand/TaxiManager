@@ -104,12 +104,15 @@ public class JourneyList {
 		boolean b = false;
 		Destination dest = j.getDestination();
 		int nbPerson = j.getNbPerson();
-		if (dest != null && nbPerson > 0 && nbPerson <= 6) {
-			journeyList.add(j);
-			b = true;
+		if (dest != null){
+			if(nbPerson > 0 && nbPerson <= 6) {
+				b = journeyList.add(j);				
+			} else {
+				System.out.println("Error adding the journey: " + j.getDestination().getName()
+						+ ", " + j.getTaxi().getRegNb() + ", " + j.getNbPerson());
+			}
 		} else {
-			throw new IllegalArgumentException(
-					"Error adding the journey, check the parameters");
+			System.out.println("Null destination during adding journey");
 		}
 		return b;
 	}
@@ -120,11 +123,6 @@ public class JourneyList {
 	 * @return string of journeys
 	 */
 	public String getAllJourneys() {
-
-		// This method only works if there are more than 10 journeys
-		if (journeyList.size() < 10)
-			throw new IllegalArgumentException(
-					"The arrayList should have at least 10 journeys");
 		// Sort the JourneyList by cost
 		Collections.sort(journeyList, new JourneyComparator());
 		Iterator<Journey> j = journeyList.iterator();
@@ -135,6 +133,7 @@ public class JourneyList {
 		StringBuilder sb2 = new StringBuilder(
 				"CHARGES FOR THE CHEAPEST 5 JOURNEYS\n");
 		int counter = 0;
+		int min = journeyList.size() < 5 ? 0 : (journeyList.size() - 5);
 		// Go through the journeyList
 		while (j.hasNext()) {
 			String allJourneys = "";
@@ -164,7 +163,7 @@ public class JourneyList {
 			allJourneys += String.format("%10s", nbPeople);
 
 			// Cost
-			allJourneys += String.format("%10s", "Cost £");
+			allJourneys += String.format("%11s", "Cost ") +FunctionalConstants.POUNDS;
 			allJourneys += String.format("%6.2f",
 					currentJourney.getJourneyFee());
 			allJourneys += '\n';
@@ -174,7 +173,7 @@ public class JourneyList {
 				sb1.append(allJourneys);
 			}
 			// Get the 5 cheapest
-			if (counter >= (journeyList.size() - 5)) {
+			if (counter >= min) {
 				sb2.append(allJourneys);
 			}
 			counter++;

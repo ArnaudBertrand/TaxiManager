@@ -8,4 +8,7 @@ public class FunctionalConstants {
 	
 	/** Line return **/
 	public static final String NEW_LINE = "\n";
+	
+	/** Pounds **/
+	public static final String POUNDS = "\u00a3";
 }

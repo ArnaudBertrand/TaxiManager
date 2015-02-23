@@ -1,6 +1,8 @@
 package Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -9,7 +11,6 @@ import Class.Journey;
 import Class.Taxi;
 
 public class TestJourney {
-	
 	//For this test, we suppose that the taxis are valid ones
 	Taxi t = new Taxi ("Bob", "LON-XFDERT");
 	//Destinations
@@ -26,33 +27,44 @@ public class TestJourney {
 	Journey j5 = new Journey (t, d5, -1);
 	
 	@Test
-	public void testGetJourneyFee1() {
+	public void testGetJourneyFee() {
 		//The fee of journey 1 should be: 5+(35*0.99)+(1*6)=45.65
 		assertEquals("error on j1" , 45.65, j1.getJourneyFee(), 2);
+		
+		//The fee of journey 2 should be: 5+(100*0.99)+(2*4)=112
+		assertEquals("error on j2" , 112, j2.getJourneyFee(), 2);
+		
+		//Problem: number of passenger > 6
+		try{
+			j3.getJourneyFee();
+			fail("error on j3");
+		} catch(IllegalArgumentException e){
+			assertTrue("error on j3", e.getMessage().contains("passenger"));
+		}
+		//Problem: distance < 0
+		try{
+			j4.getJourneyFee();
+			fail("error on j4");
+		} catch(IllegalArgumentException e){
+			assertTrue("error on j3", e.getMessage().contains("distance"));
+		}
+		
+		//Problem: number of passenger < 0
+		try{
+			j5.getJourneyFee();
+			fail("error on j5");
+		} catch(IllegalArgumentException e){
+			assertTrue("error on j3", e.getMessage().contains("passenger"));
+		}
 	}
 	
 	@Test
-	public void testGetJourneyFee2() {
-		//The fee of journey 2 should be: 5+(100*0.99)+(2*4)=112
-		assertEquals("error on j2" , 112, j2.getJourneyFee(), 2);
+	public void testCompare(){
+		String mess = "Expect to be 0 for identical";
+		assertEquals(mess,0,j1.compare(j1, j1));
+		mess = "M after E result should be > 0";
+		assertTrue(mess,j1.compare(j1, j2) > 0);
+		mess = "E before M result should be < 0";
+		assertTrue(mess,j1.compare(j2, j1) < 0);
 	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public void testGetJourneyFee3() {	
-		//Problem: number of passenger > 6
-		j3.getJourneyFee();
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public void testGetJourneyFee4() {
-		//Problem: distance < 0
-		j4.getJourneyFee();
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testGetJourneyFee5() {
-		//Problem: number of passenger < 0
-		j5.getJourneyFee();
-	}
-	
 }
