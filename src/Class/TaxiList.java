@@ -13,13 +13,13 @@ import java.util.TreeSet;
  * @version 22/02/2015
  */
 public class TaxiList {
-
 	/** List of taxis **/
 	private TreeSet<Taxi> taxiList = new TreeSet<Taxi>();
-	/** Reading errors **/
-	String readingErrors;
 	/** Manager **/
 	private Manager manager;
+	/** Errors **/
+	private static final String ERROR_READING = "Error during reading process: ";
+	private static final String ERROR_NB_ARGUMENTS = "Input line should be 'driver name,registration number'";
 	
 	/**
 	 * Constructor
@@ -27,7 +27,6 @@ public class TaxiList {
 	 */
 	public TaxiList(Manager manager){	
 		this.taxiList = new TreeSet<Taxi>();
-		this.readingErrors = "";
 		this.manager = manager;
 	}
 	
@@ -51,7 +50,7 @@ public class TaxiList {
 	 * Get the number of taxis in the list
 	 * @return number of taxis
 	 */
-	public int getTaxiNb() {
+	public int getNbTaxi() {
 		return this.taxiList.size();
 	}
 	
@@ -66,7 +65,7 @@ public class TaxiList {
 		Iterator<Taxi> taxiIterator = taxiList.iterator();
 		while(taxiIterator.hasNext()){
 			Taxi currentTaxi = taxiIterator.next();
-			if(currentTaxi.getRegNb() != null && regNb.equals(currentTaxi.getRegNb())){
+			if(regNb.equals(currentTaxi.getRegNb())){
 				taxi = currentTaxi;
 				break;
 			}
@@ -108,12 +107,7 @@ public class TaxiList {
 	 * @return 1 success - 0 fail
 	 */
 	public boolean addTaxi(Taxi t) {
-		
-		boolean isNotExisting = false;
-		if (taxiList.add(t)) {
-			isNotExisting = true;
-		}
-		return isNotExisting;
+		return taxiList.add(t);	
 	}
 	
 	/**
@@ -124,13 +118,20 @@ public class TaxiList {
 	private void processLine(String line){
 
 		String [] parts = line.split(",");
-		String driverName = parts[0];
-		String regNb = parts[1].trim();
-
-		//create Taxi object and add to the list
-		Taxi t = new Taxi(driverName, regNb);
-		this.addTaxi(t); 
-		
+		if(parts.length == 2){
+			String driverName = parts[0];
+			String regNb = parts[1].trim();
+	
+			try {
+				//create Taxi object and add to the list
+				Taxi t = new Taxi(driverName, regNb);
+				this.addTaxi(t); 
+			} catch (RegNbFormatException e) {
+				System.out.println(e.getMessage());
+			}
+		} else {
+			System.out.println(ERROR_READING + ERROR_NB_ARGUMENTS);
+		}
 	}
 	
 	/**

@@ -1,9 +1,12 @@
 package Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import Class.Destination;
@@ -11,6 +14,7 @@ import Class.FunctionalConstants;
 import Class.Journey;
 import Class.JourneyList;
 import Class.Manager;
+import Class.RegNbFormatException;
 import Class.Taxi;
 
 public class TestJourneyList {
@@ -19,30 +23,39 @@ public class TestJourneyList {
 	JourneyList JL = new JourneyList(M1);
 	ArrayList<Journey> journeyList = new ArrayList<Journey>();
 	// For this test, we suppose that the taxis are valid ones
-	Taxi t = new Taxi("Bob", "LON-XFDERT");
-	// Destinations
-	Destination d1 = new Destination("Manchester", 35);
-	Destination d2 = null;
-	Destination d3 = new Destination("Edinburgh", 100);
-	Destination d4 = new Destination("Liverpool", 78);
-
-	// Creation of journeys
-	Journey j1 = new Journey(t, d1, 6);
-	Journey j2 = new Journey(t, d2, 4);
-	Journey j3 = new Journey(t, d1, 7);
-	Journey j4 = new Journey(t, d1, -1);
-
-	Journey j11 = new Journey(t, d1, 1);
-	Journey j12 = new Journey(t, d1, 2);
-	Journey j13 = new Journey(t, d1, 3);
-	Journey j14 = new Journey(t, d1, 4);
-	Journey j15 = new Journey(t, d4, 1);
-	Journey j16 = new Journey(t, d4, 2);
-	Journey j17 = new Journey(t, d4, 3);
-	Journey j18 = new Journey(t, d4, 4);
-	Journey j19 = new Journey(t, d3, 1);
-	Journey j20 = new Journey(t, d3, 2);
-	Journey j21 = new Journey(t, d3, 3);
+	
+	Destination d1,d2,d3,d4;
+	Taxi t;
+	Journey j1,j2,j3,j4,j11,j12,j13,j14,j15,j16,j17,j18,j19,j20,j21;
+	
+	@Before public void initialize() {
+		try {
+			t = new Taxi("Bob", "LON-XFDERT");
+			// Destinations
+			d1 = new Destination("Manchester", 35);
+			d2 = null;
+			d3 = new Destination("Edinburgh", 100);
+			d4 = new Destination("Liverpool", 78);
+			// Journeys
+			j1 = new Journey(t, d1, 6);
+			j2 = new Journey(t, d2, 4);
+			j3 = new Journey(t, d1, 7);
+			j4 = new Journey(t, d1, -1);
+			j11 = new Journey(t, d1, 1);
+			j12 = new Journey(t, d1, 2);
+			j13 = new Journey(t, d1, 3);
+			j14 = new Journey(t, d1, 4);
+			j15 = new Journey(t, d4, 1);
+			j16 = new Journey(t, d4, 2);
+			j17 = new Journey(t, d4, 3);
+			j18 = new Journey(t, d4, 4);
+			j19 = new Journey(t, d3, 1);
+			j20 = new Journey(t, d3, 2);
+			j21 = new Journey(t, d3, 3);
+		} catch (RegNbFormatException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void testAddJourneyToJourneyList() {
@@ -78,7 +91,6 @@ public class TestJourneyList {
 				+ "LON-XFDERT  Manchester                  35.0km    2 people      Cost "+FunctionalConstants.POUNDS+" 41.65\n"
 				+ "LON-XFDERT  Manchester                  35.0km    1 person      Cost "+FunctionalConstants.POUNDS+" 40.65\n";
 		
-		String journey = JL.getAllJourneys();
 		assertEquals("should be equal",ExceptedList, JL.getAllJourneys());
 
 		// Add eleven journeys (10 would have been enough)

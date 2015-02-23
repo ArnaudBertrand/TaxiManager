@@ -7,6 +7,7 @@ import java.util.*;
 public class DestinationsVisited {
 	/** Instanciate variables **/
 	private static final String ERROR_READING = "Error during reading proces, destination not existing: ";
+	private static final String ERROR_ADDING_NULL_DEST = "Error trying to add null destination in destinations visited";
 	
 	/** Destinations visited **/
 	private HashMap<String, DestinationList> destinationsVisited;
@@ -70,14 +71,8 @@ public class DestinationsVisited {
 		DestinationList shared = new DestinationList();
 		
 		// Handle null values
-		DestinationList dl1 = new DestinationList();
-		DestinationList dl2 = new DestinationList();
-		if(destinationsVisited.get(year1) != null ){
-			dl1 = destinationsVisited.get(year1);
-		}
-		if(destinationsVisited.get(year2) != null){
-			dl2 = destinationsVisited.get(year2);
-		}
+		DestinationList dl1 = destinationsVisited.get(year1) != null ? destinationsVisited.get(year1) : new DestinationList();
+		DestinationList dl2 = destinationsVisited.get(year2) != null ? destinationsVisited.get(year2) : new DestinationList();
 		
 		shared = dl1.getSameDestinations(dl2);
 		year1Only = dl1.getDifferentDestinations(shared);
@@ -98,12 +93,18 @@ public class DestinationsVisited {
 	 * @return true if insert false if it already exist
 	 */
 	public boolean addDestForYear(Destination dest, String year){
-		DestinationList dstList = destinationsVisited.get(year);
-		// Handle year not existing
-		if(dstList == null){
-			dstList = new DestinationList();
-			destinationsVisited.put(year, dstList);
+		boolean added = false;
+		if(dest != null){
+			DestinationList dstList = destinationsVisited.get(year);
+			// Handle year not existing
+			if(dstList == null){
+				dstList = new DestinationList();
+				destinationsVisited.put(year, dstList);
+			}
+			added = dstList.addDestination(dest);			
+		} else{
+			System.out.println(ERROR_ADDING_NULL_DEST);
 		}
-		return dstList.addDestination(dest);
+		return added;
 	}
 }

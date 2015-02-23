@@ -2,9 +2,14 @@ package Class;
 
 public class Journey {
 
+	/** Instanciate variables **/
 	private Taxi taxi;
 	private Destination destination;
 	private int nbPerson;
+	
+	/** Errors **/
+	private final static String ERROR_NULL_TAXI_DEST = "Taxi or destination cannot be null";
+	private final static String ERROR_NB_PERSON_IN_TAXI = "Number of person in taxi out of bounds: ";
 
 	/**
 	 * Constructor
@@ -13,8 +18,16 @@ public class Journey {
 	 * @param destination
 	 * @param number
 	 *            of passenger
+	 * @throws Exception 
+	 * @throws IllegalArgumentException 
 	 * */
-	public Journey(Taxi taxi, Destination destination, int nbPerson) {
+	public Journey(Taxi taxi, Destination destination, int nbPerson) throws NullPointerException, IllegalArgumentException {
+		if(taxi == null || destination == null){
+			throw new NullPointerException(ERROR_NULL_TAXI_DEST);
+		}
+		if(nbPerson < 1 || taxi.getNbOfSeats() < nbPerson){
+			throw new IllegalArgumentException(ERROR_NB_PERSON_IN_TAXI + nbPerson);
+		}
 		this.taxi = taxi;
 		this.destination = destination;
 		this.nbPerson = nbPerson;
@@ -83,22 +96,15 @@ public class Journey {
 	 * @return fee
 	 * */
 	public double getJourneyFee() {
-		// Instantiation of the variables, fee set to 5£ at first
+		// Instantiation of the variables, fee set to 5 pounds at first
 		double fee = 5.00;
 		double distance;
 		int nbPerson;
 
 		// Get the distance of the journey
 		distance = this.destination.getDistance();
-		if (distance <= 0)
-			throw new IllegalArgumentException(
-					"Error during fee calculation, distance should be positive");
-
 		// Get the number of people of the journey
 		nbPerson = this.getNbPerson();
-		if (nbPerson < 0 || nbPerson > 6)
-			throw new IllegalArgumentException(
-					"Error during fee calculation, number of passenger should be between 1 and 6");
 
 		// Add the fee for the distance
 		fee = fee + distance * 0.99;

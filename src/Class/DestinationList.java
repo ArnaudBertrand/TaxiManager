@@ -1,11 +1,17 @@
 package Class;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class DestinationList {
 	/** Destination list **/
 	private Set<Destination> destinationList = new HashSet<Destination>();
+	/** Errors **/
+	private static final String ERROR_READING = "Error during reading process: ";
+	private static final String ERROR_NB_ARGUMENTS = "Input line should be 'destinatation,distance'";
 	
 	/**
 	 * Set a list of destination 
@@ -76,7 +82,7 @@ public class DestinationList {
 	 * @return true if contains otherwise false
 	 */
 	public boolean contains(Destination dest){
-		return destinationList.contains(dest);
+		return dest != null ? destinationList.contains(dest) : false;
 	}
 
 	/**
@@ -97,6 +103,32 @@ public class DestinationList {
 			destList += dest.getName() + FunctionalConstants.NEW_LINE;
 		}
 		return destList;
+	}
+	
+	/**
+	 * Read a file
+	 * @param fileName path of the file to read
+	 * @throws FileNotFoundException 
+	 */
+	@SuppressWarnings("resource")
+	public void readFile(String fileName) throws FileNotFoundException{
+		File f = new File(fileName);
+		Scanner scanner = new Scanner(f);
+		// Process each line
+		while (scanner.hasNextLine()) {
+			try{
+				String [] parts = scanner.nextLine().split(",");
+				if(parts.length == 2){
+					this.addDestination(new Destination(parts[0],Double.parseDouble(parts[1])));								
+				} else{
+					System.out.println(ERROR_READING + ERROR_NB_ARGUMENTS);
+				}
+			} catch (NumberFormatException e) {
+				System.out.println(ERROR_READING + e.getMessage());
+			} catch (IllegalArgumentException e) {
+				System.out.println(ERROR_READING + e.getMessage());
+			} 
+		}
 	}
 	
 	@Override

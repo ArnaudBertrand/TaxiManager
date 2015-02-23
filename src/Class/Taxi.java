@@ -1,5 +1,8 @@
 package Class;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Class representing the object Taxi
  * @author pgm1
@@ -13,19 +16,27 @@ public class Taxi implements Comparable<Taxi> {
 	private String driverName;
 	/** Number of seat in the taxi **/
 	private int nbOfSeats;
-	
-	/** Basic constructor **/
-	public Taxi(){
-	}
+	/** Regex **/
+	private static final String REGEX_REG_NB = "[A-Z]{3}-[A-Z0-9]{6}";
 	
 	/**
 	 * Constructor
 	 * @param driverName name of the driver of the taxi
 	 * @param regNb registration number or the taxi
+	 * @throws RegNbFormatException 
 	 */
-	public Taxi(String driverName, String regNb){	
+	public Taxi(String driverName, String regNb) throws RegNbFormatException{	
 		this.driverName = driverName;
-		this.regNb = regNb;
+		
+		Pattern regex = Pattern.compile(REGEX_REG_NB);
+		Matcher match = regex.matcher(regNb);
+		if(regNb.length() != 10 || !match.find()){
+			throw new RegNbFormatException(regNb);
+		}
+		this.regNb = regNb;			
+		
+		//Set default value for nbOfSeats can be handled later in the input file
+		nbOfSeats = 6;
 	}
 	
 	/**
@@ -79,9 +90,14 @@ public class Taxi implements Comparable<Taxi> {
 	/**
 	 * Equals method
 	 */
-	public boolean equals(Taxi other){
-		return (other.getRegNb().equals(this.getRegNb()));
-	} 
+	public boolean equals(Object other){
+		boolean eq = false;
+		if(other != null && other instanceof Taxi){
+		    Taxi t = (Taxi) other;
+			eq = this.getRegNb().equals(t.getRegNb());
+		}
+		return eq;
+	}
 	
 	/**
 	 * CompareTo method

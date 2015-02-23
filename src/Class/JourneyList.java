@@ -14,12 +14,17 @@ import java.util.Scanner;
  * @version 22/02/2015
  * */
 public class JourneyList {
-
+	
+	/** Instanciate variables **/
 	// Journey List
 	private ArrayList<Journey> journeyList = new ArrayList<Journey>();
 	// Manager class
 	private Manager manager;
-
+	
+	/** Errors **/
+	private static final String ERROR_READING = "Error during reading process: ";
+	private static final String ERROR_NB_ARGUMENTS = "Input line should be 'reg nb,destination,nb person'";
+	
 	// Constructors
 	public JourneyList(Manager manager) {
 		this.journeyList = new ArrayList<Journey>();
@@ -76,22 +81,33 @@ public class JourneyList {
 	private void processLine(String line) {
 
 		String[] parts = line.split(",");
-		String regNb = parts[0].trim();
-		String dest = parts[1].trim();
-		int nbPerson = Integer.parseInt(parts[2].trim());
+		if(parts.length == 3){
+			String regNb = parts[0].trim();
+			String dest = parts[1].trim();
+			
+			try{
+				int nbPerson = Integer.parseInt(parts[2].trim());
 
-		// Create a new object taxi with the correct regNb
-		Taxi taxi = new Taxi("", regNb);
+				// Create a new object taxi with the correct regNb
+				Taxi taxi = manager.getTaxiList().getTaxiByRegNb(regNb);
 
-		// Get the destination object corresponding to the destination
-		Destination destination = manager.getValidDestinations().getDest(dest);
+				// Get the destination object corresponding to the destination
+				Destination destination = manager.getValidDestinations().getDest(dest);
 
-		// create a Journey object and add it to the list
-		Journey j = new Journey(taxi, destination, nbPerson);
-		this.addJourney(j);
-		manager.getDestinationsVisited().addDestForYear(destination,
-				FunctionalConstants.YEAR_2015);
-
+				// create a Journey object and add it to the list
+				this.addJourney(new Journey(taxi, destination, nbPerson));
+				manager.getDestinationsVisited().addDestForYear(destination,
+						FunctionalConstants.YEAR_2015);			
+			} catch(NumberFormatException e){
+				System.out.println(ERROR_READING + e.getMessage());
+			} catch(IllegalArgumentException e){
+				System.out.println(ERROR_READING + e.getMessage());
+			} catch(NullPointerException e){
+				System.out.println(ERROR_READING + e.getMessage());
+			}			
+		} else {
+			System.out.println(ERROR_READING + ERROR_NB_ARGUMENTS);
+		}
 	}
 
 	/**
@@ -101,20 +117,7 @@ public class JourneyList {
 	 *            journey to add
 	 */
 	public boolean addJourney(Journey j) {
-		boolean b = false;
-		Destination dest = j.getDestination();
-		int nbPerson = j.getNbPerson();
-		if (dest != null){
-			if(nbPerson > 0 && nbPerson <= 6) {
-				b = journeyList.add(j);				
-			} else {
-				System.out.println("Error adding the journey: " + j.getDestination().getName()
-						+ ", " + j.getTaxi().getRegNb() + ", " + j.getNbPerson());
-			}
-		} else {
-			System.out.println("Null destination during adding journey");
-		}
-		return b;
+		return journeyList.add(j);
 	}
 
 	/**

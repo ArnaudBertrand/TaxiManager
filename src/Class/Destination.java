@@ -5,6 +5,8 @@ public class Destination {
 	private String name;
 	/** Distance **/
 	private double distance;
+	/** Errors **/
+	private final static String ERROR_CONST_DISTANCE = "Distance cannot be negative: name: ";
 	
 	/** Basic constructor **/
 	public Destination(){
@@ -15,7 +17,10 @@ public class Destination {
 	 * @param name name of the destination
 	 * @param distance distance from base
 	 */
-	public Destination(String name, double distance){
+	public Destination(String name, double distance) throws IllegalArgumentException{
+		if(distance < 0){
+			throw new IllegalArgumentException(ERROR_CONST_DISTANCE + distance);
+		}
 		this.name = name;
 		this.distance = distance;
 	}
@@ -59,13 +64,13 @@ public class Destination {
 	/**
 	 * Equals method
 	 */
-	public boolean equals(Object obj){
-		if(obj != null && obj instanceof Destination){
-		    Destination d = (Destination) obj;			
-			return name == d.getName();
-		} else{
-			return false;
+	public boolean equals(Object other){
+		boolean eq = false;
+		if(other != null && other instanceof Destination){
+			Destination d = (Destination) other;
+			eq = this.getName().equals(d.getName());
 		}
+		return eq;
 	}
 	
 	/**

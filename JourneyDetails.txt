@@ -60,7 +60,7 @@ L-123456, London Bridge, 9
 MIL-LOO OO, London Bridge, 9
 MAN-89BM15, London Bridge, 90000000
 MAN-7NTR43, Dover, -3
-MAN-KILLME, Kensington Palace, !èç
+MAN-KILLME, Kensington Palace, opidwq
 MAN-XXXXXX, Hyde Park, null
 MAN-70HJ80, ZSL London Zoo, ic56
 MAN-65TV21, Victoria Avenue, -0

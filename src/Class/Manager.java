@@ -1,11 +1,9 @@
 package Class;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Manager {
 	/**
@@ -26,8 +24,7 @@ public class Manager {
 	private static final String DEST_NEW_PLACES = " NEW PLACES IN 2015";
 	private static final String DEST_OLD_PLACES =  " PLACES VISITED IN 2014 ONLY";
 	private static final String DEST_BOTH_PLACES = " PLACES VISITED IN BOTH 2014 AND 2015";
-	private static final String HEADER_DRIVER_DEST = "Text file containing details of which places each driver has visited: ";
-	private static final String ERROR_READING = "Error during reading process: ";
+	private static final String HEADER_DRIVER_DEST = "Text file containing details of which places each driver has visited: \n";
 	
 	/** List of taxis **/
 	private TaxiList taxiList;
@@ -57,7 +54,7 @@ public class Manager {
 			taxiList.readFile(PATH_READ_TAXI_DETAILS);
 			
 			// Import valid destinations
-			this.readFile(PATH_READ_DEST_VALID);
+			validDestinations.readFile(PATH_READ_DEST_VALID);
 
 			// Import JourneyList
 			journeyList.readFile(PATH_READ_DEST_JOURNEY);
@@ -96,7 +93,7 @@ public class Manager {
 	 */
 	private String getDriverDestinations(){
 		// Generate the DriverDestinations report
-		String report = HEADER_DRIVER_DEST + FunctionalConstants.NEW_LINE + FunctionalConstants.NEW_LINE;
+		String report = HEADER_DRIVER_DEST + FunctionalConstants.NEW_LINE;
 		report += taxiList.getDriverNameAndDest();
 		
 		// Return the report
@@ -211,37 +208,13 @@ public class Manager {
 		 }
 		 //message and stop if file not found
 		 catch (FileNotFoundException fnf){
-			 
 			 System.out.println(filename + " not found ");
-			 System.exit(0);
 		 }
 		 //stack trace here because we don't expect to come here
 		 catch (IOException ioe){
 		    ioe.printStackTrace();
 		    System.exit(1);
 		 }
-	}
-	
-	/**
-	 * Read a file
-	 * @param fileName path of the file to read
-	 * @throws FileNotFoundException 
-	 */
-	@SuppressWarnings("resource")
-	private void readFile(String fileName) throws FileNotFoundException{
-		File f = new File(fileName);
-		Scanner scanner = new Scanner(f);
-		// Process each line
-		while (scanner.hasNextLine()) {
-			try{
-				String [] parts = scanner.nextLine().split(",");
-				Destination dest = new Destination(parts[0],Double.parseDouble(parts[1]));
-				validDestinations.addDestination(dest);			
-			} catch (NumberFormatException e) {
-				System.out.println(ERROR_READING + e.getMessage());
-			}
-		}
-	}
-	
+	}	
 }
 
